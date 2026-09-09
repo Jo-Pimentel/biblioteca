@@ -1,16 +1,44 @@
+import "../css/telaCadastro.css";
+import { useState } from "react";
+
 export default function CadastroAluno() {
-    let mensagemSucesso = "Aluno cadastrado com sucesso"
+    const [mensagem, setMensagem] = useState("");
+    const [nomeAluno, setNomeAluno] = useState("");
+    const [cpfAluno, setCpfAluno] = useState("");
+    const [listaDeAlunos, setListaDeAlunos] = useState([]);
+
+    function cadastrarAluno() {
+        if(!nomeAluno.trim() || !cpfAluno.trim()) {
+            setMensagem("Erro! Algum dos campos não foi informado.");
+        } else {
+            const novoAluno = {
+                "id": listaDeAlunos.length + 1,
+                "nomeAluno": nomeAluno,
+                "cpf": cpfAluno
+            }
+            {listaDeAlunos.push(novoAluno)};
+            console.log(novoAluno);
+            setMensagem("Aluno cadastrado com sucesso!");
+        }
+    }
+
     return (
-        <div className="containerCadastro">
-            <label>Digite o nome do aluno abaixo</label>
-            <input type="text" id="nomeAluno"/>
+        <div className="screen">
+            <div className="telaCadastro">
+                <label>Digite o nome do aluno abaixo</label>
+                <input type="text" id="nomeAluno" onInput={(evt) => {
+                    setNomeAluno(evt.target.value);
+                }}/>
 
-            <label>Digite a senha do aluno abaixo</label>
-            <input type="password" id="senhaAluno"/>
+                <label>Digite o CPF do aluno abaixo</label>
+                <input type="text" id="cpfAluno" onInput={(evt) => {
+                    setCpfAluno(evt.target.value);
+                }}/>
 
-            <button>Cadastrar</button>
+                <button id="btnCadastrarAluno" onClick={() => {cadastrarAluno()}}>Cadastrar aluno</button>
 
-            <h1>{mensagemSucesso}</h1>
+                <h1>{mensagem}</h1>
+            </div>
         </div>
     )
 }

@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import CadastroAluno from "./components/CadastroAluno.jsx";
-//import ListaDeItens from "./components/ListaDeItens.jsx";
-import UseStateTeste from "./components/UseStateTeste.jsx";
 import { useState } from 'react';
+import CadastroAluno from "./components/CadastroAluno.jsx";
+import CadastroItem from "./components/CadastroItem.jsx";
+import CatalogoItens from "./components/CatalogoItens.jsx";
+import LoginAluno from "./components/LoginAluno.jsx";
 
 export default function Home() {
   return (
     <>
-      <UseStateTeste/>
+      <CadastroAluno/>
     </>
   );
 }

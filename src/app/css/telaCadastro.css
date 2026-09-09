@@ -1,0 +1,23 @@
+/* CSS usado em todas as telas de cadastro */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+.screen {
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.telaCadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 100vh;
+}
