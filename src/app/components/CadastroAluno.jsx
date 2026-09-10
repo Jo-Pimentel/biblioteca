@@ -1,25 +1,31 @@
 import "../css/telaCadastro.css";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function CadastroAluno() {
     const [mensagem, setMensagem] = useState("");
     const [nomeAluno, setNomeAluno] = useState("");
     const [cpfAluno, setCpfAluno] = useState("");
-    const [listaDeAlunos, setListaDeAlunos] = useState([]);
+    //const [listaDeAlunos, setListaDeAlunos] = useState([]);
 
     function cadastrarAluno() {
-        if(!nomeAluno.trim() || !cpfAluno.trim()) {
-            setMensagem("Erro! Algum dos campos não foi informado.");
-        } else {
-            const novoAluno = {
-                "id": listaDeAlunos.length + 1,
-                "nomeAluno": nomeAluno,
-                "cpf": cpfAluno
-            }
-            {listaDeAlunos.push(novoAluno)};
-            console.log(novoAluno);
-            setMensagem("Aluno cadastrado com sucesso!");
-        }
+        // if(!nomeAluno.trim() || !cpfAluno.trim()) {
+        //     setMensagem("Erro! Algum dos campos não foi informado.");
+        // } else {
+        //     const novoAluno = {
+        //         "nomeAluno": nomeAluno,
+        //         "cpf": cpfAluno
+        //     }
+            
+            
+        // }
+        useEffect(() => {
+            alunoService.salvarAluno(novoAluno).then((response) => {
+                console.log(aluno);
+            }).catch((error) => {
+                console.log("Erro ao cadastrar o aluno. " + error);
+            })
+        });
     }
 
     return (

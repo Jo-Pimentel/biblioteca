@@ -1,19 +1,27 @@
 import "../css/telaCadastro.css";
+import { useState } from "react";
 
 export default function CadastroItem() {
+    const [tituloItem, setTituloItem] = useState("");
+    const [qtdExemplaresDisponivies, setQtdExemplaresDisponiveis] = useState(0);
+    const [anoPublicacao, setAnoPublicacao] = useState(0);
+
     return(
         <div className="telaCadastro">
             <label>Digite o nome do item abaixo</label>
-            <input type="text" id="nomeItem"/>
-
-            <label>Digite o nome do item abaixo</label>
-            <input type="text" id="nomeItem"/>
+            <input type="text" id="nomeItem" onInput={(evt) => {
+                setTituloItem(evt.target.value);
+            }}/>
 
             <label>Digite a quantidade de exemplares disponíveis</label>
-            <input type="number" id="qtdExemplaresDisponiveis"/>
+            <input type="number" id="qtdExemplaresDisponiveis" onInput={(evt) => {
+                setQtdExemplaresDisponiveis(evt.target.value);
+            }}/>
 
             <label>Digite o ano de publicação do item</label>
-            <input type="text" id="autorAno"/>
+            <input type="text" id="anoDePublicacao" onInput={(evt) => {
+                setAnoPublicacao(evt.target.value);
+            }}/>
         </div>
     )
 }
