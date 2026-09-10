@@ -11,7 +11,7 @@ import BuscarAlunos from "./components/BuscarAlunos.jsx";
 export default function Home() {
   return (
     <>
-      <CadastroAluno/>
+      <BuscarAlunos/>
     </>
   );
 }
