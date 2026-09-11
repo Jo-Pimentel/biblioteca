@@ -21,6 +21,10 @@ export default class AlunoService {
         return axiosInstance.put(`/atualizarAluno/${id}`, aluno)
     }
 
+    atualizarAlunoPorCpf(cpf, alunoAtualizado) {
+        return axiosInstance.put(`atualizarAlunoPorCpf/${cpf}`, alunoAtualizado)
+    }
+
     deletarAluno(id) {
         return axiosInstance.delete(`/deletarAluno/${id}`)
     }

@@ -9,6 +9,11 @@ export default function AtualizarAluno() {
     const [cpfAluno, setCpfAluno] = useState("");
     const [idAluno, setIdAluno] = useState(0);
     const alunoService = new AlunoService;
+    const listaDeAlunos = alunoService.buscarAlunos().then((response) => {
+        console.log(response.data);
+    }).catch((error) => {
+        console.log(error);
+    })
 
     return (
         <div className="screen">
@@ -23,25 +28,20 @@ export default function AtualizarAluno() {
                     setCpfAluno(evt.target.value);
                 }}/>
 
-                <label>Digite o ID do aluno abaixo</label>
-                <input type="number" onInput={(evt) => {
-                    setIdAluno(evt.target.value);
-                }}/>
-
                 <button type="submit" onClick={() => {
                     const alunoAtualizado = {
                         "nome": nomeAluno,
                         "cpf": cpfAluno
                     }
 
-                    alunoService.atualizarAluno(idAluno, alunoAtualizado).then((response) => {
+                    alunoService.atualizarAlunoPorCpf(alunoAtualizado.cpf, alunoAtualizado).then((response) => {
                         console.log(response.data);
-                        setMensagem("Aluno cadastrado com sucesso!");
+                        alert("Aluno cadastrado com sucesso!");
                     }).catch((error) => {
                         console.log(error);
-                        setMensagem(error);
+                        alert(error);
                     }) 
-                }}>Cadastrar aluno</button>
+                }}>Atualizar aluno</button>
 
                 <h1>{mensagem}</h1>
             </div>

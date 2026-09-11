@@ -12,7 +12,7 @@ import AtualizarAluno from "./components/AtualizarAluno.jsx";
 export default function Home() {
   return (
     <>
-      <CatalogoAlunos/>
+      <AtualizarAluno/>
     </>
   );
 }
