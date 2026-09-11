@@ -3,7 +3,7 @@ import axios from "axios";
 import AlunoService from "../service/AlunoService.jsx";
 
 
-export default function BuscarAlunos() {
+export default function CatalogoAlunos() {
     const [listaDeAlunos, setListaDeAlunos] = useState([]);
     const [nomeAluno, setNomeAluno] = useState("");
     const alunoService = new AlunoService;
@@ -33,7 +33,23 @@ export default function BuscarAlunos() {
             <ol>
                 {listaDeAlunos.map((aluno) => {
                     return(
-                        <li key={aluno.id}>Nome: {aluno.nome} | CPF: {aluno.cpf}</li>
+                        <li key={aluno.id}>
+                            Nome: {aluno.nome} | CPF: {aluno.cpf} | 
+                            <button type="submit" onClick={() => {
+                                const permissaoParaDeletar = confirm("Deseja realmente deletar esse aluno do sistema?");
+
+                                if(permissaoParaDeletar) {
+                                    alunoService.deletarAluno(aluno.id).then((response) => {
+                                        alert("Aluno deletado do sistema com sucesso.");
+                                        console.log(response.data);
+                                        location.reload();
+                                    }).catch((error) => {
+                                        alert("Erro ao deletar o aluno do sistema.");
+                                        console.log(error);
+                                    })
+                                }
+                            }}>Deletar aluno do sistema</button>
+                        </li>
                     )
                 })}
             </ol>
