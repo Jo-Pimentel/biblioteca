@@ -14,11 +14,11 @@ export default class AlunoService {
     }
 
     salvarAluno(aluno) {
-        return axiosInstance.post("/salvarAluno");
+        return axiosInstance.post("/salvarAluno", aluno);
     }
 
     atualizarAluno(id, aluno) {
-        return axiosInstance.put(`/atualizarAluno/${id}`)
+        return axiosInstance.put(`/atualizarAluno/${id}`, aluno)
     }
 
     deletarAluno(id) {

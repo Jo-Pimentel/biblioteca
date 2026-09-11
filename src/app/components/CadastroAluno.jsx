@@ -1,34 +1,13 @@
 import "../css/telaCadastro.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import AlunoService from "../service/AlunoService";
 
 export default function CadastroAluno() {
     const [mensagem, setMensagem] = useState("");
     const [nomeAluno, setNomeAluno] = useState("");
     const [cpfAluno, setCpfAluno] = useState("");
-    const [aluno, setAluno] = useState("");
-    
-    //const [listaDeAlunos, setListaDeAlunos] = useState([]);
-
-    // function cadastrarAluno() {
-    //     if(!nomeAluno.trim() || !cpfAluno.trim()) {
-    //         setMensagem("Erro! Algum dos campos não foi informado.");
-    //     } else {
-    //         const novoAluno = {
-    //             "nomeAluno": nomeAluno,
-    //             "cpf": cpfAluno
-    //         }
-            
-            
-    //     }
-    //     useEffect(() => {
-    //         alunoService.salvarAluno(novoAluno).then((response) => {
-    //             console.log(aluno);
-    //         }).catch((error) => {
-    //             console.log("Erro ao cadastrar o aluno. " + error);
-    //         })
-    //     });
-    // }
+    const alunoService = new AlunoService;
 
     return (
         <div className="screen">
@@ -36,24 +15,27 @@ export default function CadastroAluno() {
                 <label>Digite o nome do aluno abaixo</label>
                 <input type="text" id="nomeAluno" onInput={(evt) => {
                     setNomeAluno(evt.target.value);
-                    console.log(nomeAluno);
                 }}/>
 
                 <label>Digite o CPF do aluno abaixo</label>
                 <input type="text" id="cpfAluno" onInput={(evt) => {
                     setCpfAluno(evt.target.value);
-                    console.log(cpfAluno);
                 }}/>
 
-                <input type="button" value="Cadastrar aluno" onInput={() => {
-                    useEffect(() => {
-                        alunoService.salvarAluno(novoAluno).then((response) => {
-                            console.log(response.data);
-                        }).catch((error) => {
-                            console.log("Erro ao cadastrar o aluno. " + error);
-                        })
-                    });
-                }}/>
+                <button type="submit" onClick={() => {
+                    const novoAluno = {
+                        "nome": nomeAluno,
+                        "cpf": cpfAluno
+                    }
+
+                    alunoService.salvarAluno(novoAluno).then((response) => {
+                        console.log(response.data);
+                        setMensagem("Aluno cadastrado com sucesso!");
+                    }).catch((error) => {
+                        console.log(error);
+                        setMensagem(error);
+                    }) 
+                }}>Cadastrar aluno</button>
 
                 <h1>{mensagem}</h1>
             </div>

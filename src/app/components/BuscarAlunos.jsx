@@ -1,15 +1,13 @@
-//import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import AlunoService from "../service/AlunoService.jsx";
-import { useEffect } from "react";
-import { useState } from "react";
 
 
 export default function BuscarAlunos() {
     const [listaDeAlunos, setListaDeAlunos] = useState([]);
     const [nomeAluno, setNomeAluno] = useState("");
     const alunoService = new AlunoService;
-    console.log("renderizou");
+    //console.log("renderizou");
 
     // Buscar todos os alunos
     useEffect(() => {
@@ -31,14 +29,14 @@ export default function BuscarAlunos() {
 
     return (
         <div>
-            <h1>Alunos cadastrados</h1>
+            <h1>Alunos cadastrados</h1><br />
             <ol>
                 {listaDeAlunos.map((aluno) => {
                     return(
-                    <li key={aluno.id}>Nome: {aluno.nome} CPF: {aluno.cpf}</li>)
+                        <li key={aluno.id}>Nome: {aluno.nome} | CPF: {aluno.cpf}</li>
+                    )
                 })}
             </ol>
-        </div>
-        
+        </div> 
     )
 }
