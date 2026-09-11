@@ -28,13 +28,18 @@ export default function AtualizarAluno() {
                     setCpfAluno(evt.target.value);
                 }}/>
 
+                <label>Digite o Id do aluno abaixo</label>
+                <input type="text" onInput={(evt) => {
+                    setIdAluno(evt.target.value);
+                }}/>
+
                 <button type="submit" onClick={() => {
                     const alunoAtualizado = {
                         "nome": nomeAluno,
                         "cpf": cpfAluno
                     }
 
-                    alunoService.atualizarAlunoPorCpf(alunoAtualizado.cpf, alunoAtualizado).then((response) => {
+                    alunoService.atualizarAluno(idAluno, alunoAtualizado).then((response) => {
                         console.log(response.data);
                         alert("Aluno cadastrado com sucesso!");
                     }).catch((error) => {
