@@ -1,10 +1,14 @@
 import "../css/telaCadastro.css";
 import { useState } from "react";
+import CadastroFilme from "./CadastroFilme";
+import CadastroLivro from "./CadastroLivro";
 
 export default function CadastroItem() {
     const [tituloItem, setTituloItem] = useState("");
     const [qtdExemplaresDisponivies, setQtdExemplaresDisponiveis] = useState(0);
     const [anoPublicacao, setAnoPublicacao] = useState(0);
+    const [tipoItem, setTipoItem] = useState("livro");
+    const [proximaPagina, setProximaPagina] = useState();
 
     return(
         <div className="telaCadastro">
@@ -22,6 +26,29 @@ export default function CadastroItem() {
             <input type="text" id="anoDePublicacao" onInput={(evt) => {
                 setAnoPublicacao(evt.target.value);
             }}/>
+
+            <select onChange={(evt) => {
+                setTipoItem(evt.target.value)
+            }}>
+                <option value="livro">Livro</option>
+                <option value="filme">Filme</option>
+            </select>
+
+            <button onClick={() => {
+                sessionStorage.setItem("TituloItem", tituloItem)
+                sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies)
+                sessionStorage.setItem("AnoPublicacao", anoPublicacao)
+
+                if(tipoItem == "livro") {
+                    setProximaPagina(<CadastroLivro></CadastroLivro>)
+                } else {
+                    setProximaPagina(<CadastroFilme></CadastroFilme>)
+                }
+            }}>Próxima etapa</button>
+
+            <div>
+                {proximaPagina}
+            </div>
         </div>
     )
 }

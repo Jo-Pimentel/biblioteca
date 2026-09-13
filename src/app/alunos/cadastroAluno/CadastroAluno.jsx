@@ -1,7 +1,8 @@
-import "../css/telaCadastro.css";
+import "../../css/telaCadastro.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import AlunoService from "../service/AlunoService";
+import AlunoService from "../../service/AlunoService";
+import AtualizarAluno from "../atualizarAluno/AtualizarAluno";
 
 export default function CadastroAluno() {
     const [mensagem, setMensagem] = useState("");

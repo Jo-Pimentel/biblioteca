@@ -1,7 +1,7 @@
-import "../css/telaCadastro.css";
+import "../../css/telaCadastro.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import AlunoService from "../service/AlunoService";
+import AlunoService from "../../service/AlunoService";
 
 export default function AtualizarAluno() {
     const [mensagem, setMensagem] = useState("");
@@ -28,18 +28,19 @@ export default function AtualizarAluno() {
                     setCpfAluno(evt.target.value);
                 }}/>
 
-                <label>Digite o Id do aluno abaixo</label>
-                <input type="text" onInput={(evt) => {
-                    setIdAluno(evt.target.value);
-                }}/>
-
                 <button type="submit" onClick={() => {
+                    let confirmarAtualizacao = confirm("Deseja realmente atualizar este aluno?");
+
+                    //if(confirmarAtualizacao) {}
                     const alunoAtualizado = {
+                        "id": sessionStorage.getItem("IdAluno"),
                         "nome": nomeAluno,
                         "cpf": cpfAluno
                     }
 
-                    alunoService.atualizarAluno(idAluno, alunoAtualizado).then((response) => {
+                    sessionStorage.clear;
+
+                    alunoService.atualizarAluno(alunoAtualizado.id, alunoAtualizado).then((response) => {
                         console.log(response.data);
                         alert("Aluno cadastrado com sucesso!");
                     }).catch((error) => {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AlunoService from "../service/AlunoService.jsx";
+import Link from "next/link.js";
+import AtualizarAluno from "./atualizarAluno/AtualizarAluno.jsx";
 
 
 export default function CatalogoAlunos() {
@@ -49,10 +51,17 @@ export default function CatalogoAlunos() {
                                     })
                                 }
                             }}>Deletar aluno do sistema</button>
+                            <button onClick={() => {
+                                sessionStorage.setItem("IdAluno", aluno.id);
+                            }}>
+                                <Link href={'/alunos/atualizarAluno'}>Atualizar informações do aluno</Link>
+                            </button>
                         </li>
                     )
                 })}
             </ol>
+
+            <button><Link href={'/alunos/cadastroAluno'}>Cadastrar novo aluno</Link></button>
         </div> 
     )
 }

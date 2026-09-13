@@ -2,17 +2,21 @@
 import Image from "next/image";
 import React from "react";
 import { useState } from 'react';
-import CadastroAluno from "./components/CadastroAluno.jsx";
+import CadastroAluno from "./alunos/cadastroAluno/CadastroAluno.jsx";
 import CadastroItem from "./components/CadastroItem.jsx";
 import CatalogoItens from "./components/CatalogoItens.jsx";
-//import LoginAluno from "./components/LoginAluno.jsx";
-import CatalogoAlunos from "./components/CatalogoAlunos.jsx";
-import AtualizarAluno from "./components/AtualizarAluno.jsx";
+import LoginAluno from "./components/LoginAluno.jsx";
+import CatalogoAlunos from "./alunos/CatalogoAlunos.jsx";
+//import AtualizarAluno from "./alunos/AtualizarAluno.jsx";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from "./components/Home.jsx";
+import Link from 'next/link';
 
-export default function Home() {
+export default function App() {
   return (
     <>
-      <AtualizarAluno/>
+      <Link href={'/alunos'}>Alunos</Link>
+      <Link href={'/itens'}>Itens</Link>
     </>
   );
 }
