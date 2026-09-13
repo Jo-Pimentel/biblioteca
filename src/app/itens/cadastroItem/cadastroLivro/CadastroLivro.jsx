@@ -1,20 +1,26 @@
-import "../css/telaCadastro.css";
+import "../../../css/telaCadastro.css";
 import { useState } from "react";
 
 export default function CadastroItem() {
-    const [diretor, setDiretor] = useState("");
-    const [duracaoEmMinutos, setDuracaoEmMinutos] = useState(0);
+    const [autor, setAutor] = useState("");
+    const [editora, setEditora] = useState("");
+    const [qtdPaginas, setQtdPaginas] = useState(0);
 
     return(
         <div className="telaCadastro">
-            <label>Digite o nome do diretor abaixo</label>
+            <label>Digite o nome do autor abaixo</label>
             <input type="text" id="nomeItem" onInput={(evt) => {
-                setDiretor(evt.target.value);
+                setAutor(evt.target.value);
             }}/>
 
-            <label>Digite a duração em minutos do filme</label>
+            <label>Digite a editora do livro abaixo</label>
             <input type="number" id="qtdExemplaresDisponiveis" onInput={(evt) => {
-                setDuracaoEmMinutos(evt.target.value);
+                setEditora(evt.target.value);
+            }}/>
+
+            <label>Digite a quantidade de páginas abaixo</label>
+            <input type="text" id="anoDePublicacao" onInput={(evt) => {
+                setQtdPaginas(evt.target.value);
             }}/>
 
             <button onClick={() => {

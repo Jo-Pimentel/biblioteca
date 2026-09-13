@@ -1,7 +1,7 @@
-import "../css/telaCadastro.css";
+import "../../css/telaCadastro.css";
 import { useState } from "react";
-import CadastroFilme from "./CadastroFilme";
-import CadastroLivro from "./CadastroLivro";
+import CadastroFilme from "./cadastroFilme/CadastroFilme";
+import CadastroLivro from "./cadastroLivro/CadastroLivro";
 
 export default function CadastroItem() {
     const [tituloItem, setTituloItem] = useState("");
@@ -30,25 +30,17 @@ export default function CadastroItem() {
             <select onChange={(evt) => {
                 setTipoItem(evt.target.value)
             }}>
-                <option value="livro">Livro</option>
-                <option value="filme">Filme</option>
+                <option value="/cadastroLivro">Livro</option>
+                <option value="/cadastroFilme">Filme</option>
             </select>
 
             <button onClick={() => {
                 sessionStorage.setItem("TituloItem", tituloItem)
                 sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies)
                 sessionStorage.setItem("AnoPublicacao", anoPublicacao)
-
-                if(tipoItem == "livro") {
-                    setProximaPagina(<CadastroLivro></CadastroLivro>)
-                } else {
-                    setProximaPagina(<CadastroFilme></CadastroFilme>)
-                }
-            }}>Próxima etapa</button>
-
-            <div>
-                {proximaPagina}
-            </div>
+            }}>
+                <Link href={tipoItem}>Próxima etapa</Link>
+            </button>
         </div>
     )
 }
