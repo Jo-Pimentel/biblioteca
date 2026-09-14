@@ -1,4 +1,5 @@
 import "../../../css/telaCadastro.css";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function CadastroItem() {
@@ -8,12 +9,12 @@ export default function CadastroItem() {
     return(
         <div className="telaCadastro">
             <label>Digite o nome do diretor abaixo</label>
-            <input type="text" id="nomeItem" onInput={(evt) => {
+            <input type="text" onInput={(evt) => {
                 setDiretor(evt.target.value);
             }}/>
 
             <label>Digite a duração em minutos do filme</label>
-            <input type="number" id="qtdExemplaresDisponiveis" onInput={(evt) => {
+            <input type="number" onInput={(evt) => {
                 setDuracaoEmMinutos(evt.target.value);
             }}/>
 
@@ -22,6 +23,11 @@ export default function CadastroItem() {
                 sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies)
                 sessionStorage.setItem("AnoPublicacao", anoPublicacao)
             }}>Próxima etapa</button>
+
+            <div>
+                <button><Link href={'/itens/cadastroItem'}>Voltar para a tela anterior</Link></button>
+                <button><Link href={'/itens'}>Voltar para o catálogo</Link></button>
+            </div>
         </div>
     )
 }

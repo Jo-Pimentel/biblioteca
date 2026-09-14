@@ -41,6 +41,8 @@ export default function CadastroItem() {
             }}>
                 <Link href={tipoItem}>Próxima etapa</Link>
             </button>
+
+            <button><Link href={'/itens'}>Voltar para o catálogo</Link></button>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import "../../css/telaCadastro.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import AlunoService from "../../service/AlunoService";
+import Link from "next/link";
 import AtualizarAluno from "../atualizarAluno/AtualizarAluno";
 
 export default function CadastroAluno() {
@@ -39,6 +40,8 @@ export default function CadastroAluno() {
                 }}>Cadastrar aluno</button>
 
                 <h1>{mensagem}</h1>
+
+                <button><Link href={"/alunos"}>Voltar para o catálogo</Link></button>
             </div>
         </div>
     )

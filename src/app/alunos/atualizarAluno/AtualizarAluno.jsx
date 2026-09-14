@@ -1,6 +1,7 @@
 import "../../css/telaCadastro.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import Link from "next/link";
 import AlunoService from "../../service/AlunoService";
 
 export default function AtualizarAluno() {
@@ -8,12 +9,21 @@ export default function AtualizarAluno() {
     const [nomeAluno, setNomeAluno] = useState("");
     const [cpfAluno, setCpfAluno] = useState("");
     const [idAluno, setIdAluno] = useState(0);
+    const [alunoAtualizado, setAlunoAtualizado] = useState({});
     const alunoService = new AlunoService;
     const listaDeAlunos = alunoService.buscarAlunos().then((response) => {
         console.log(response.data);
     }).catch((error) => {
         console.log(error);
     })
+
+    useEffect(() => {
+        alunoService.buscarAlunoPorId(sessionStorage.getItem("IdAluno")).then((response) => {
+            setAlunoAtualizado(response.data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }, [])
 
     return (
         <div className="screen">
@@ -31,14 +41,20 @@ export default function AtualizarAluno() {
                 <button type="submit" onClick={() => {
                     let confirmarAtualizacao = confirm("Deseja realmente atualizar este aluno?");
 
-                    //if(confirmarAtualizacao) {}
-                    const alunoAtualizado = {
-                        "id": sessionStorage.getItem("IdAluno"),
-                        "nome": nomeAluno,
-                        "cpf": cpfAluno
+                    console.log(nomeAluno.trim != " ");
+                    console.log(cpfAluno.trim != " ");
+                    if(nomeAluno.trim != "") {
+                        alunoAtualizado.nome = nomeAluno;
+                        console.log(alunoAtualizado.nome);
                     }
 
-                    sessionStorage.clear;
+                    if(cpfAluno.trim != "") {
+                        alunoAtualizado.cpf = cpfAluno;
+                        console.log(alunoAtualizado.cpf);
+                    }
+
+                    //sessionStorage.clear;
+                    console.log(alunoAtualizado);
 
                     alunoService.atualizarAluno(alunoAtualizado.id, alunoAtualizado).then((response) => {
                         console.log(response.data);
@@ -50,6 +66,8 @@ export default function AtualizarAluno() {
                 }}>Atualizar aluno</button>
 
                 <h1>{mensagem}</h1>
+
+                <button><Link href={"/alunos"}>Voltar para o catálogo</Link></button>
             </div>
         </div>
     )

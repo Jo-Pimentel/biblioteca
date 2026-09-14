@@ -4,7 +4,6 @@ import AlunoService from "../service/AlunoService.jsx";
 import Link from "next/link.js";
 import AtualizarAluno from "./atualizarAluno/AtualizarAluno.jsx";
 
-
 export default function CatalogoAlunos() {
     const [listaDeAlunos, setListaDeAlunos] = useState([]);
     const [nomeAluno, setNomeAluno] = useState("");
@@ -62,6 +61,7 @@ export default function CatalogoAlunos() {
             </ol>
 
             <button><Link href={'/alunos/cadastroAluno'}>Cadastrar novo aluno</Link></button>
+            <button><Link href={'/'}>Voltar para a tela inicial</Link></button>
         </div> 
     )
 }

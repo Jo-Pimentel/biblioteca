@@ -62,9 +62,8 @@ export default function CatalogoItens() {
                 }
             </ol>
 
-            <div className="catalogo">
-                <Link href={'/itens/cadastroItem'}>Cadastrar novo item</Link>
-            </div>
+            <button><Link href={'/itens/cadastroItem'}>Cadastrar novo item</Link></button>
+            <button><Link href={'/'}>Voltar para a página inicial</Link></button>
         </>
     )
 }
