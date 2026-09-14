@@ -1,5 +1,6 @@
 import "../../css/telaCadastro.css";
 import { useState } from "react";
+import Link from "next/link";
 import CadastroFilme from "./cadastroFilme/CadastroFilme";
 import CadastroLivro from "./cadastroLivro/CadastroLivro";
 
@@ -7,9 +8,8 @@ export default function CadastroItem() {
     const [tituloItem, setTituloItem] = useState("");
     const [qtdExemplaresDisponivies, setQtdExemplaresDisponiveis] = useState(0);
     const [anoPublicacao, setAnoPublicacao] = useState(0);
-    const [tipoItem, setTipoItem] = useState("livro");
-    const [proximaPagina, setProximaPagina] = useState();
-
+    const [tipoItem, setTipoItem] = useState("/itens/cadastroItem/cadastroLivro");
+    
     return(
         <div className="telaCadastro">
             <label>Digite o nome do item abaixo</label>
@@ -30,8 +30,8 @@ export default function CadastroItem() {
             <select onChange={(evt) => {
                 setTipoItem(evt.target.value)
             }}>
-                <option value="/cadastroLivro">Livro</option>
-                <option value="/cadastroFilme">Filme</option>
+                <option value="/itens/cadastroItem/cadastroLivro">Livro</option>
+                <option value="/itens/cadastroItem/cadastroFilme">Filme</option>
             </select>
 
             <button onClick={() => {

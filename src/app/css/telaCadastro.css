@@ -21,3 +21,7 @@
     gap: 10px;
     height: 100vh;
 }
+
+p {
+    font-weight: bold;
+}
