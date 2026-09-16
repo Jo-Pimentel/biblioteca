@@ -51,6 +51,8 @@ export default function CatalogoItens() {
                                         })
                                     }
                                 }}>Deletar livro do sistema</button>
+
+                                <Link href={'/atualizarItem'}><button>Atualizar informações do livro</button></Link>
                             </li>
                         )
                     })
@@ -77,6 +79,8 @@ export default function CatalogoItens() {
                                         })
                                     }
                                 }}>Deletar filme do sistema</button>
+
+                                <Link href={'/atualizarItem'}><button>Atualizar informações do filme</button></Link>
                             </li>
                         )
                     })

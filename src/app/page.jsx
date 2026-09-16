@@ -13,8 +13,9 @@ import Link from 'next/link';
 export default function App() {
   return (
     <>
-      <Link href={'/alunos'}>Alunos</Link>
-      <Link href={'/itens'}>Itens</Link>
+      <Link href={'/alunos'}><button>Alunos</button></Link>
+      <Link href={'/itens'}><button>Itens</button></Link>
+      <Link href={'/alugueis'}><button>Aluguéis</button></Link>
     </>
   );
 }
