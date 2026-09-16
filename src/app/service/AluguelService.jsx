@@ -9,8 +9,8 @@ export default class AluguelService {
         return axios.get("/buscarAlugueis");
     }
 
-    realizarAluguel(aluguel) {
-        return axios.post("/realizarAluguel", aluguel);
+    realizarAluguel(aluguelDto) {
+        return axios.post("/realizarAluguel", aluguelDto);
     }
 
     prorrogarDevolucao(id) {

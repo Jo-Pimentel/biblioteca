@@ -5,7 +5,6 @@ import { useState } from 'react';
 import CadastroAluno from "./alunos/cadastroAluno/CadastroAluno.jsx";
 import CadastroItem from "./itens/cadastroItem/CadastroItem.jsx";
 import CatalogoItens from "./itens/CatalogoItens.jsx";
-import LoginAluno from "./components/LoginAluno.jsx";
 import CatalogoAlunos from "./alunos/CatalogoAlunos.jsx";
 //import AtualizarAluno from "./alunos/AtualizarAluno.jsx";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

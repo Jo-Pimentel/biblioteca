@@ -55,6 +55,11 @@ export default function CatalogoAlunos() {
                             }}>
                                 <Link href={'/alunos/atualizarAluno'}>Atualizar informações do aluno</Link>
                             </button>
+                            {/* <button onClick={(evt) => {
+                                alert("Hello world")
+                            }}>
+                                <Link>Realizar aluguel</Link>
+                            </button> */}
                         </li>
                     )
                 })}

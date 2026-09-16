@@ -34,13 +34,24 @@ export default function CadastroItem() {
                 <option value="/itens/cadastroItem/cadastroFilme">Filme</option>
             </select>
 
-            <button onClick={() => {
-                sessionStorage.setItem("TituloItem", tituloItem)
-                sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies)
-                sessionStorage.setItem("AnoPublicacao", anoPublicacao)
+            {/* <button onClick={() => {
+                sessionStorage.setItem("TituloItem", tituloItem);
+                sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies);
+                sessionStorage.setItem("AnoPublicacao", anoPublicacao);
+                console.log(qtdExemplaresDisponivies);
             }}>
                 <Link href={tipoItem}>Próxima etapa</Link>
-            </button>
+            </button> */}
+
+            <Link href={tipoItem}>
+                <button onClick={() => {
+                    sessionStorage.setItem("TituloItem", tituloItem);
+                    sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies);
+                    sessionStorage.setItem("AnoPublicacao", anoPublicacao);
+
+                    alert(tituloItem);
+                }}>Próxima etapa</button>
+            </Link>
 
             <button><Link href={'/itens'}>Voltar para o catálogo</Link></button>
         </div>

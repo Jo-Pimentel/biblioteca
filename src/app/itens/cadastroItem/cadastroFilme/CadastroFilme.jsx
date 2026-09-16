@@ -1,3 +1,4 @@
+import FilmeService from "@/app/service/FilmeService";
 import "../../../css/telaCadastro.css";
 import Link from "next/link";
 import { useState } from "react";
@@ -5,6 +6,7 @@ import { useState } from "react";
 export default function CadastroItem() {
     const [diretor, setDiretor] = useState("");
     const [duracaoEmMinutos, setDuracaoEmMinutos] = useState(0);
+    const filmeService = new FilmeService;
 
     return(
         <div className="telaCadastro">
@@ -19,14 +21,28 @@ export default function CadastroItem() {
             }}/>
 
             <button onClick={() => {
-                sessionStorage.setItem("TituloItem", tituloItem)
-                sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies)
-                sessionStorage.setItem("AnoPublicacao", anoPublicacao)
+                console.log(sessionStorage.getItem("TituloItem"));
+
+                const novoFilme = {
+                    "titulo": sessionStorage.getItem("TituloItem"),
+                    "diretor": diretor,
+                    "anoPublicacao": sessionStorage.getItem("AnoPublicacao"),
+                    "duracaoEmMinutos": duracaoEmMinutos,
+                    "qtdExemplaresDisponiveis": sessionStorage.getItem("QtdExemplaresDisponiveis"),
+                };
+
+                //sessionStorage.clear;
+
+                filmeService.salvarFilme(novoFilme).then((response) => {
+                    console.log(response.data);
+                }).catch((error) => {
+                    console.log(error);
+                })
             }}>Próxima etapa</button>
 
             <div>
-                <button><Link href={'/itens/cadastroItem'}>Voltar para a tela anterior</Link></button>
-                <button><Link href={'/itens'}>Voltar para o catálogo</Link></button>
+                <Link href={'/itens/cadastroItem'}><button>Voltar para a tela anterior</button></Link>
+                <Link href={'/itens'}><button>Voltar para o catálogo</button></Link>
             </div>
         </div>
     )

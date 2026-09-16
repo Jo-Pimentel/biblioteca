@@ -39,7 +39,18 @@ export default function CatalogoItens() {
                             <li key={livro.id}>
                                 Título: {livro.titulo} | Cópias disponíveis: {livro.qtdExemplaresDisponiveis}
 
-                                <button>Deletar livro do sistema</button>
+                                <button onClick={() => {
+                                    const confirmarApagamento = confirm("Deseja realmente deletar este livro do sistema?");
+
+                                    if(confirmarApagamento) {
+                                        livroService.deletarLivro(livro.id).then((response) => {
+                                            alert("Livro deletado com sucesso");
+                                            location.reload;
+                                        }).catch((error) => {
+                                            console.log(error);
+                                        })
+                                    }
+                                }}>Deletar livro do sistema</button>
                             </li>
                         )
                     })
@@ -55,7 +66,17 @@ export default function CatalogoItens() {
                             <li key={filme.id}>
                                 Título: {filme.titulo} | Cópias disponíveis: {filme.qtdExemplaresDisponiveis}
 
-                                <button>Deletar filme do sistema</button>
+                                <button onClick={() => {
+                                    const confirmarApagamento = confirm("Deseja realmente deletar este livro do sistema?");
+
+                                    if(confirmarApagamento) {
+                                        filmeService.deletarFilme(filme.id).then((response) => {
+                                            location.reload
+                                        }).catch((error) => {
+                                            console.log(error);
+                                        })
+                                    }
+                                }}>Deletar filme do sistema</button>
                             </li>
                         )
                     })

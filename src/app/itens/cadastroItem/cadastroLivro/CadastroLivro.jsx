@@ -37,6 +37,8 @@ export default function CadastroItem() {
                     "aluno": null,
                 }
 
+                sessionStorage.clear;
+
                 livroService.salvarLivro(novoLivro).then((response) => {
                     console.log(response.data);
                 }).catch((error) => {

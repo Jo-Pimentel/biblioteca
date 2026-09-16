@@ -13,12 +13,12 @@ export default class FilmeService {
         return axiosInstance.get(`/buscarFilmePorId/${id}`)
     }
 
-    salvarFilme(livro) {
-        return axiosInstance.post("/salvarFilme", livro)
+    salvarFilme(filme) {
+        return axiosInstance.post("/salvarFilme", filme)
     }
 
-    atualizarFilme(id, livro) {
-        return axiosInstance.put(`/atualizarFilme/${id}`, livro)
+    atualizarFilme(id, filme) {
+        return axiosInstance.put(`/atualizarFilme/${id}`, filme)
     }
 
     deletarFilme(id) {
