@@ -10,7 +10,7 @@ export default class AluguelService {
     }
 
     realizarAluguel(aluguelDto) {
-        return axios.post("/realizarAluguel", aluguelDto);
+        return axios.post("http://localhost:8080/biblioteca/alugueis/realizarAluguel", aluguelDto);
     }
 
     prorrogarDevolucao(id) {

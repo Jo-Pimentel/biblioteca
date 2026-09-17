@@ -37,7 +37,7 @@ export default function CatalogoItens() {
                     listaLivros.map((livro) => {
                         return (
                             <li key={livro.id}>
-                                Título: {livro.titulo} | Cópias disponíveis: {livro.qtdExemplaresDisponiveis}
+                                {livro.titulo} | Cópias disponíveis: {livro.qtdExemplaresDisponiveis} | Código: {livro.codigoItem}
 
                                 <button onClick={() => {
                                     const confirmarApagamento = confirm("Deseja realmente deletar este livro do sistema?");
@@ -45,14 +45,15 @@ export default function CatalogoItens() {
                                     if(confirmarApagamento) {
                                         livroService.deletarLivro(livro.id).then((response) => {
                                             alert("Livro deletado com sucesso");
-                                            location.reload;
+                                            location.reload();
                                         }).catch((error) => {
                                             console.log(error);
                                         })
                                     }
                                 }}>Deletar livro do sistema</button>
 
-                                <Link href={'/atualizarItem'}><button>Atualizar informações do livro</button></Link>
+                                <Link href={'/atualizarItem'}><button>Atualizar informações do livro</button></Link><br />
+                                <Link href={'/alugueis/realizarAluguel'}><button>Alugar livro</button></Link> <br />
                             </li>
                         )
                     })
@@ -66,21 +67,23 @@ export default function CatalogoItens() {
                     listaFilmes.map((filme) => {
                         return (
                             <li key={filme.id}>
-                                Título: {filme.titulo} | Cópias disponíveis: {filme.qtdExemplaresDisponiveis}
+                                {filme.titulo} | Cópias disponíveis: {filme.qtdExemplaresDisponiveis} | Código: {filme.codigoItem}
 
                                 <button onClick={() => {
                                     const confirmarApagamento = confirm("Deseja realmente deletar este livro do sistema?");
 
                                     if(confirmarApagamento) {
                                         filmeService.deletarFilme(filme.id).then((response) => {
-                                            location.reload
+                                            alert("Filme apagado com sucesso.");
+                                            location.reload();
                                         }).catch((error) => {
                                             console.log(error);
                                         })
                                     }
                                 }}>Deletar filme do sistema</button>
 
-                                <Link href={'/atualizarItem'}><button>Atualizar informações do filme</button></Link>
+                                <Link href={'/atualizarItem'}><button>Atualizar informações do filme</button></Link> <br />
+                                <Link href={'/alugueis/realizarAluguel'}><button>Alugar filme</button></Link> <br />
                             </li>
                         )
                     })

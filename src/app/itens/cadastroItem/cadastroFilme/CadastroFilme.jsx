@@ -35,6 +35,7 @@ export default function CadastroItem() {
 
                 filmeService.salvarFilme(novoFilme).then((response) => {
                     console.log(response.data);
+                    alert("Filme cadastrado com sucesso.");
                 }).catch((error) => {
                     console.log(error);
                 })

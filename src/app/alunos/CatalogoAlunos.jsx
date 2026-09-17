@@ -54,12 +54,9 @@ export default function CatalogoAlunos() {
                                 sessionStorage.setItem("IdAluno", aluno.id);
                             }}>
                                 <Link href={'/alunos/atualizarAluno'}>Atualizar informações do aluno</Link>
-                            </button>
-                            {/* <button onClick={(evt) => {
-                                alert("Hello world")
-                            }}>
-                                <Link>Realizar aluguel</Link>
-                            </button> */}
+                            </button> <br />
+
+                            Livro aluguado: {aluno.item.titulo}
                         </li>
                     )
                 })}

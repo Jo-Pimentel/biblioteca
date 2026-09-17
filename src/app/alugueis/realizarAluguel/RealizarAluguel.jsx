@@ -14,7 +14,7 @@ export default function RealizarAluguel() {
 
             <button onClick={() => {
                 const aluguelDto = {
-                    "id": sessionStorage.getItem("IdAluno"),
+                    "idAluno": sessionStorage.getItem("IdAluno"),
                     "codigoItem": codigoItem
                 };
 

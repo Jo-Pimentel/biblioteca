@@ -48,8 +48,6 @@ export default function CadastroItem() {
                     sessionStorage.setItem("TituloItem", tituloItem);
                     sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies);
                     sessionStorage.setItem("AnoPublicacao", anoPublicacao);
-
-                    alert(tituloItem);
                 }}>Próxima etapa</button>
             </Link>
 

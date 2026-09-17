@@ -34,13 +34,13 @@ export default function CadastroItem() {
                     "editora": editora,
                     "qtdExemplaresDisponiveis": sessionStorage.getItem("QtdExemplaresDisponiveis"),
                     "qtdPaginas": qtdPaginas,
-                    "aluno": null,
                 }
 
                 sessionStorage.clear;
 
                 livroService.salvarLivro(novoLivro).then((response) => {
                     console.log(response.data);
+                    alert("Livro cadastrado com sucesso!");
                 }).catch((error) => {
                     alert("Erro ao salvar o livro no sistema " + error);
                 })
