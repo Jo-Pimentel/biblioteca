@@ -53,7 +53,10 @@ export default function CatalogoItens() {
                                 }}>Deletar livro do sistema</button>
 
                                 <Link href={'/atualizarItem'}><button>Atualizar informações do livro</button></Link><br />
-                                <Link href={'/alugueis/realizarAluguel'}><button>Alugar livro</button></Link> <br />
+                                <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
+                                    sessionStorage.setItem("IdItem", livro.id);
+                                    sessionStorage.setItem("TipoItem", livro.tipoItem);
+                                }}>Alugar livro</button></Link> <br />
                             </li>
                         )
                     })
@@ -83,7 +86,10 @@ export default function CatalogoItens() {
                                 }}>Deletar filme do sistema</button>
 
                                 <Link href={'/atualizarItem'}><button>Atualizar informações do filme</button></Link> <br />
-                                <Link href={'/alugueis/realizarAluguel'}><button>Alugar filme</button></Link> <br />
+                                <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
+                                    sessionStorage.setItem("IdItem", filme.id);
+                                    sessionStorage.setItem("TipoItem", filme.tipoItem);
+                                }}>Alugar filme</button></Link> <br />
                             </li>
                         )
                     })
