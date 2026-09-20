@@ -53,7 +53,7 @@ export default function AtualizarAluno() {
                         console.log(alunoAtualizado.cpf);
                     }
 
-                    //sessionStorage.clear;
+                    sessionStorage.clear();
                     console.log(alunoAtualizado);
 
                     alunoService.atualizarAluno(alunoAtualizado.id, alunoAtualizado).then((response) => {
@@ -67,7 +67,8 @@ export default function AtualizarAluno() {
 
                 <h1>{mensagem}</h1>
 
-                <button><Link href={"/alunos"}>Voltar para o catálogo</Link></button>
+                <Link href={'/alunos'}><button>Voltar para o catálogo</button></Link>
+                <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
             </div>
         </div>
     )

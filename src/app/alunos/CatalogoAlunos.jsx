@@ -26,7 +26,7 @@ export default function CatalogoAlunos() {
         }).catch((error) => {
             console.log("Erro ao buscar o aluno com o ID fornecido. " + error);
         })
-    }, [])
+    }, []);
 
     return (
         <div>
@@ -50,20 +50,20 @@ export default function CatalogoAlunos() {
                                     })
                                 }
                             }}>Deletar aluno do sistema</button>
-                            <button onClick={() => {
-                                sessionStorage.setItem("IdAluno", aluno.id);
-                            }}>
-                                <Link href={'/alunos/atualizarAluno'}>Atualizar informações do aluno</Link>
-                            </button> <br />
 
-                            Livro aluguado: {aluno.item.titulo}
+                            <Link href={'/alunos/atualizarAluno'}>
+                                <button onClick={() => {
+                                    sessionStorage.setItem("IdAluno", aluno.id)
+                                }}>Atualizar informações do aluno</button>
+                            </Link>
                         </li>
                     )
                 })}
             </ol>
 
-            <button><Link href={'/alunos/cadastroAluno'}>Cadastrar novo aluno</Link></button>
-            <button><Link href={'/'}>Voltar para a tela inicial</Link></button>
+            <Link href={'/alunos/cadastroAluno'}><button>Cadastrar novo aluno</button></Link>
+            <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
+            <Link href={'/alugueis'}><button>Ir para os aluguéis</button></Link>
         </div> 
     )
 }

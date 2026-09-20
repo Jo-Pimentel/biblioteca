@@ -6,18 +6,18 @@ export const axiosInstance = axios.create({
 
 export default class AluguelService {
     buscarAlugueis() {
-        return axios.get("/buscarAlugueis");
+        return axiosInstance.get("/buscarAlugueis");
     }
 
     realizarAluguel(aluguelDto) {
-        return axios.post("http://localhost:8080/biblioteca/alugueis/realizarAluguel", aluguelDto);
+        return axiosInstance.post("/realizarAluguel", aluguelDto);
     }
 
     prorrogarDevolucao(id) {
-        return axios.put(`/prorrogarDevolucao/${id}`);
+        return axiosInstance.put(`/prorrogarDevolucao/${id}`);
     }
 
     devolucao(id) {
-        return axios.put(`/devolucao/${id}`);
+        return axiosInstance.put(`/devolucao/${id}`);
     }
 }

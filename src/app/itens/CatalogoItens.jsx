@@ -9,6 +9,8 @@ export default function CatalogoItens() {
     const filmeService = new FilmeService;
     const [listaLivros, setListaLivros] = useState([]);
     const [listaFilmes, setListaFilmes] = useState([]);
+    let itensEscolhidos = [];
+    let index = 0;
 
     useEffect(() => {
         livroService.buscarLivros().then((response) => {
@@ -35,8 +37,25 @@ export default function CatalogoItens() {
             <ol>
                 {
                     listaLivros.map((livro) => {
+                        let indiceLivro = index;
+                        if(index == listaLivros.length) {
+                            index = 0;
+                        } else {
+                            index += 1;
+                        }
                         return (
-                            <li key={livro.id}>
+                            <li key={livro.id} onClick={(evt) => {
+                                const livroSelecionado = document.querySelectorAll("li")[indiceLivro];
+                                if(livroSelecionado.className == "itemSelecionado") {
+                                    livroSelecionado.classList.remove("itemSelecionado");
+                                    itensEscolhidos.pop(livro);
+                                    console.log(itensEscolhidos)
+                                } else {
+                                    livroSelecionado.classList.add("itemSelecionado");
+                                    itensEscolhidos.push(livro);
+                                    console.log(itensEscolhidos);
+                                }
+                            }}>
                                 {livro.titulo} | Cópias disponíveis: {livro.qtdExemplaresDisponiveis} | Código: {livro.codigoItem}
 
                                 <button onClick={() => {
@@ -68,8 +87,21 @@ export default function CatalogoItens() {
             <ol>
                 {
                     listaFilmes.map((filme) => {
+                        let indiceFilme = index;
+                        index += 1;
                         return (
-                            <li key={filme.id}>
+                            <li key={filme.id} onClick={() => {
+                                const filmeSelecionado = document.querySelectorAll("li")[indiceFilme];
+                                if(filmeSelecionado.className == "itemSelecionado") {
+                                    filmeSelecionado.classList.remove("itemSelecionado");
+                                    itensEscolhidos.pop(filme);
+                                    console.log(itensEscolhidos)
+                                } else {
+                                    filmeSelecionado.classList.add("itemSelecionado");
+                                    itensEscolhidos.push(filme);
+                                    console.log(itensEscolhidos);
+                                }
+                            }}>
                                 {filme.titulo} | Cópias disponíveis: {filme.qtdExemplaresDisponiveis} | Código: {filme.codigoItem}
 
                                 <button onClick={() => {
@@ -85,7 +117,7 @@ export default function CatalogoItens() {
                                     }
                                 }}>Deletar filme do sistema</button>
 
-                                <Link href={'/atualizarItem'}><button>Atualizar informações do filme</button></Link> <br />
+                                <Link href={'/itens/atualizarItem'}><button>Atualizar informações do filme</button></Link> <br />
                                 <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
                                     sessionStorage.setItem("IdItem", filme.id);
                                     sessionStorage.setItem("TipoItem", filme.tipoItem);
@@ -96,8 +128,13 @@ export default function CatalogoItens() {
                 }
             </ol>
 
-            <button><Link href={'/itens/cadastroItem'}>Cadastrar novo item</Link></button>
-            <button><Link href={'/'}>Voltar para a página inicial</Link></button>
+            <Link href={'/itens/cadastroItem'}><button>Cadastrar novo item</button></Link>
+            <Link href={'/'}><button>Voltar para a página inicial</button></Link>
+            <Link href={'/alugueis'}><button>Ir para aluguéis</button></Link>
+            <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
+                let stringItensEscolhidos = JSON.stringify(itensEscolhidos);
+                sessionStorage.setItem("ItensEscolhidos", stringItensEscolhidos);
+            }}>Alugar itens</button></Link>
         </>
     )
 }

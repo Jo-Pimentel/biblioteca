@@ -41,7 +41,8 @@ export default function CadastroAluno() {
 
                 <h1>{mensagem}</h1>
 
-                <button><Link href={"/alunos"}>Voltar para o catálogo</Link></button>
+                <Link href={'/alunos'}><button>Voltar para o catálogo</button></Link>
+                <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
             </div>
         </div>
     )

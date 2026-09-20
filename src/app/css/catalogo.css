@@ -1,0 +1,5 @@
+.itemSelecionado {
+    background-color: cadetblue;
+    color: white;
+    transition: 0.5s;
+}
