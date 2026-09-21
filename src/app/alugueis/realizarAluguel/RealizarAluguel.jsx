@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function RealizarAluguel() {
     const [cpfAluno, setCpfAluno] = useState("");
-    const [qtdMesesAluguel, setQtdMesesAluguel] = useState(0);
+    const [qtdDiasAluguel, setQtdDiasAluguel] = useState(0);
     const aluguelService = new AluguelService;
 
     return (
@@ -17,7 +17,7 @@ export default function RealizarAluguel() {
 
                 <label>Digite a quantidade de meses do aluguel</label>
                 <input type="number" onInput={(evt) => {
-                    setQtdMesesAluguel(evt.target.value);
+                    setQtdDiasAluguel(evt.target.value);
                 }}/>
 
                 <button onClick={() => {
@@ -25,7 +25,7 @@ export default function RealizarAluguel() {
                         "cpfAluno": cpfAluno,
                         "idsItens": JSON.parse(sessionStorage.getItem("IdsItensEscolhidos")),
                         "tiposItens": JSON.parse(sessionStorage.getItem("TiposItensEscolhidos")),
-                        "qtdMesesAluguel": qtdMesesAluguel
+                        "qtdDiasAluguel": qtdDiasAluguel
                     };
 
                     console.log(aluguelDto);

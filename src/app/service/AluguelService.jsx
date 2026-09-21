@@ -10,7 +10,13 @@ export default class AluguelService {
     }
 
     realizarAluguel(aluguelDto) {
-        return axiosInstance.post("/realizarAluguel", aluguelDto);
+        return axiosInstance.post("/realizarAluguel", aluguelDto)
+        .catch((error) => {
+            // if(error.response) {
+            // }
+            alert(error.response.data.mensagem);
+
+        });
     }
 
     prorrogarDevolucao(id) {
