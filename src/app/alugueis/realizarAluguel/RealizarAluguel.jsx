@@ -17,18 +17,18 @@ export default function RealizarAluguel() {
 
                 <label>Digite a quantidade de meses do aluguel</label>
                 <input type="number" onInput={(evt) => {
-                    setCpfAluno(evt.target.value);
+                    setQtdMesesAluguel(evt.target.value);
                 }}/>
 
                 <button onClick={() => {
                     const aluguelDto = {
                         "cpfAluno": cpfAluno,
-                        "itens": JSON.parse(sessionStorage.getItem("ItensEscolhidos")),
-                        "tiposItens": [],
+                        "idsItens": JSON.parse(sessionStorage.getItem("IdsItensEscolhidos")),
+                        "tiposItens": JSON.parse(sessionStorage.getItem("TiposItensEscolhidos")),
                         "qtdMesesAluguel": qtdMesesAluguel
                     };
 
-                    console.log(aluguelDto.itens);
+                    console.log(aluguelDto);
 
                     sessionStorage.clear();
 

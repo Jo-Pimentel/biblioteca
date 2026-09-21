@@ -9,7 +9,8 @@ export default function CatalogoItens() {
     const filmeService = new FilmeService;
     const [listaLivros, setListaLivros] = useState([]);
     const [listaFilmes, setListaFilmes] = useState([]);
-    let itensEscolhidos = [];
+    let idsItensEscolhidos = [];
+    let tiposItensEscolhidos = [];
     let index = 0;
 
     useEffect(() => {
@@ -48,12 +49,12 @@ export default function CatalogoItens() {
                                 const livroSelecionado = document.querySelectorAll("li")[indiceLivro];
                                 if(livroSelecionado.className == "itemSelecionado") {
                                     livroSelecionado.classList.remove("itemSelecionado");
-                                    itensEscolhidos.pop(livro);
-                                    console.log(itensEscolhidos)
+                                    idsItensEscolhidos.pop(livro.id);
+                                    tiposItensEscolhidos.pop(livro.tipoItem);
                                 } else {
                                     livroSelecionado.classList.add("itemSelecionado");
-                                    itensEscolhidos.push(livro);
-                                    console.log(itensEscolhidos);
+                                    idsItensEscolhidos.push(livro.id);
+                                    tiposItensEscolhidos.push(livro.tipoItem);;
                                 }
                             }}>
                                 {livro.titulo} | Cópias disponíveis: {livro.qtdExemplaresDisponiveis} | Código: {livro.codigoItem}
@@ -94,12 +95,12 @@ export default function CatalogoItens() {
                                 const filmeSelecionado = document.querySelectorAll("li")[indiceFilme];
                                 if(filmeSelecionado.className == "itemSelecionado") {
                                     filmeSelecionado.classList.remove("itemSelecionado");
-                                    itensEscolhidos.pop(filme);
-                                    console.log(itensEscolhidos)
+                                    idsItensEscolhidos.pop(filme.id);
+                                    tiposItensEscolhidos.pop(filme.tipoItem);
                                 } else {
                                     filmeSelecionado.classList.add("itemSelecionado");
-                                    itensEscolhidos.push(filme);
-                                    console.log(itensEscolhidos);
+                                    idsItensEscolhidos.push(filme.id);
+                                    tiposItensEscolhidos.push(filme.tipoItem);
                                 }
                             }}>
                                 {filme.titulo} | Cópias disponíveis: {filme.qtdExemplaresDisponiveis} | Código: {filme.codigoItem}
@@ -132,8 +133,8 @@ export default function CatalogoItens() {
             <Link href={'/'}><button>Voltar para a página inicial</button></Link>
             <Link href={'/alugueis'}><button>Ir para aluguéis</button></Link>
             <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
-                let stringItensEscolhidos = JSON.stringify(itensEscolhidos);
-                sessionStorage.setItem("ItensEscolhidos", stringItensEscolhidos);
+                sessionStorage.setItem("IdsItensEscolhidos", JSON.stringify(idsItensEscolhidos));
+                sessionStorage.setItem("TiposItensEscolhidos", JSON.stringify(tiposItensEscolhidos));
             }}>Alugar itens</button></Link>
         </>
     )
