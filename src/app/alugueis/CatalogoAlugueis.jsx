@@ -33,8 +33,8 @@ export default function CatalogoAlugueis() {
                     {listaDeAlugueis.map((aluguel) => {
                         return (
                             <li key={aluguel.id}>Aluno: {aluguel.aluno.nome} <br />Itens: {aluguel.itens.map((item) => {
-                                return(
-                                    <><span key={item.id}><strong>{item.titulo}</strong></span><br /></>
+                                return (
+                                    <><div key={item.id}>{item.titulo}</div></>
                                 )
                             })} <br />Data de devolução: {aluguel.dataDevolucao} <br />
                             Aluguel realizado em: {aluguel.dataAluguel} <br />
@@ -49,14 +49,14 @@ export default function CatalogoAlugueis() {
                                 }}>Prorrogar devolução em 1 semana</button>
 
                                 <button onClick={() => {
-                                    const confirmarDevolucao = confirm("Deseja realmente realizar a devolução de " + aluguel.item.titulo + "?");
+                                    const confirmarDevolucao = confirm("Deseja realmente realizar a devolução dos itens?");
 
                                     if(confirmarDevolucao) {
                                         aluguelService.devolucao(aluguel.id).then(() => {
-                                            alert(aluguel.item.titulo + " devolvido com sucesso.");
+                                            alert("Itens devolvidos com sucesso.");
                                             location.reload();
                                         }).catch((error) => {
-                                            alert("Erro ao devolver o item");
+                                            alert("Erro ao devolver os itens");
                                             console.log(error);
                                         })
                                     }

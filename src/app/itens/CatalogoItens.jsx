@@ -46,16 +46,21 @@ export default function CatalogoItens() {
                         }
                         return (
                             <li key={livro.id} onClick={(evt) => {
-                                const livroSelecionado = document.querySelectorAll("li")[indiceLivro];
-                                if(livroSelecionado.className == "itemSelecionado") {
-                                    livroSelecionado.classList.remove("itemSelecionado");
-                                    idsItensEscolhidos.pop(livro.id);
-                                    tiposItensEscolhidos.pop(livro.tipoItem);
+                                if(livro.qtdExemplaresDisponiveis > 0) {
+                                    const livroSelecionado = document.querySelectorAll("li")[indiceLivro];
+                                    if(livroSelecionado.className != "itemSelecionado") {
+                                        livroSelecionado.classList.add("itemSelecionado");
+                                        idsItensEscolhidos.push(livro.id);
+                                        tiposItensEscolhidos.push(livro.tipoItem);
+                                    } else {
+                                        livroSelecionado.classList.remove("itemSelecionado");
+                                        idsItensEscolhidos.pop(livro.id);
+                                        tiposItensEscolhidos.pop(livro.tipoItem);
+                                    }
                                 } else {
-                                    livroSelecionado.classList.add("itemSelecionado");
-                                    idsItensEscolhidos.push(livro.id);
-                                    tiposItensEscolhidos.push(livro.tipoItem);;
+                                    alert("Livro indisponível");
                                 }
+                                
                             }}>
                                 {livro.titulo} | Cópias disponíveis: {livro.qtdExemplaresDisponiveis} | Código: {livro.codigoItem}
 
@@ -92,15 +97,19 @@ export default function CatalogoItens() {
                         index += 1;
                         return (
                             <li key={filme.id} onClick={() => {
-                                const filmeSelecionado = document.querySelectorAll("li")[indiceFilme];
-                                if(filmeSelecionado.className == "itemSelecionado") {
-                                    filmeSelecionado.classList.remove("itemSelecionado");
-                                    idsItensEscolhidos.pop(filme.id);
-                                    tiposItensEscolhidos.pop(filme.tipoItem);
+                                if(filme.qtdExemplaresDisponiveis > 0) {
+                                    const filmeSelecionado = document.querySelectorAll("li")[indiceFilme];
+                                    if(filmeSelecionado.className == "itemSelecionado") {
+                                        filmeSelecionado.classList.remove("itemSelecionado");
+                                        idsItensEscolhidos.pop(filme.id);
+                                        tiposItensEscolhidos.pop(filme.tipoItem);
+                                    } else {
+                                        filmeSelecionado.classList.add("itemSelecionado");
+                                        idsItensEscolhidos.push(filme.id);
+                                        tiposItensEscolhidos.push(filme.tipoItem);
+                                    }
                                 } else {
-                                    filmeSelecionado.classList.add("itemSelecionado");
-                                    idsItensEscolhidos.push(filme.id);
-                                    tiposItensEscolhidos.push(filme.tipoItem);
+                                    alert("Filme indisponível");
                                 }
                             }}>
                                 {filme.titulo} | Cópias disponíveis: {filme.qtdExemplaresDisponiveis} | Código: {filme.codigoItem}
