@@ -32,7 +32,11 @@ export default function CatalogoAlugueis() {
                 <ol>
                     {listaDeAlugueis.map((aluguel) => {
                         return (
-                            <li key={aluguel.id}>Aluno: {aluguel.aluno.nome} <br />Item: {aluguel.item.titulo} <br />Data de devolução: {aluguel.dataDevolucao} <br />
+                            <li key={aluguel.id}>Aluno: {aluguel.aluno.nome} <br />Itens: {aluguel.itens.map((item) => {
+                                return(
+                                    <><span key={item.id}><strong>{item.titulo}</strong></span><br /></>
+                                )
+                            })} <br />Data de devolução: {aluguel.dataDevolucao} <br />
                             Aluguel realizado em: {aluguel.dataAluguel} <br />
                             Devolvido em: {aluguel.devolvidoEm} <br />
                                 <button onClick={() => {
