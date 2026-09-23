@@ -33,6 +33,19 @@ export default function CatalogoItens() {
         <>
             <h1>Catálogo de itens</h1>
 
+            <label htmlFor="">Ver: </label>
+            <select onClick={(evt) => {
+                if(evt.target.value == "filmes") {
+                    return (
+                        <h1>Hello world!</h1>
+                    )
+                }
+            }}>
+                <option value="livros">Livros</option>
+                <option value="filmes">Filmes</option>
+                <option value="ambos">Ambos</option>
+            </select>
+
             <p>Livros</p>
 
             <ol>

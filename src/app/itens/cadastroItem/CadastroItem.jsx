@@ -43,7 +43,7 @@ export default function CadastroItem() {
                 <Link href={tipoItem}>Próxima etapa</Link>
             </button> */}
 
-            <Link href={tipoItem}>
+            <Link href={tipoItem} aria-disabled>
                 <button onClick={() => {
                     sessionStorage.setItem("TituloItem", tituloItem);
                     sessionStorage.setItem("QtdExemplaresDisponiveis", qtdExemplaresDisponivies);

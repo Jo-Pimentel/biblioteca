@@ -13,6 +13,10 @@ export default class AlunoService {
         return axiosInstance.get(`/buscarAlunoPorId/${id}`);
     }
 
+    buscarAlunosPorPagina(informacoesPagina) {
+        return axiosInstance.get(`/buscarAlunosPorPagina?page=${informacoesPagina.page}&size=${informacoesPagina.size}&sort=${informacoesPagina.sort},asc`);
+    }
+
     salvarAluno(aluno) {
         return axiosInstance.post("/salvarAluno", aluno);
     }

@@ -5,61 +5,107 @@ import Link from "next/link.js";
 import AtualizarAluno from "./atualizarAluno/AtualizarAluno.jsx";
 
 export default function CatalogoAlunos() {
-    const [listaDeAlunos, setListaDeAlunos] = useState([]);
+    const [listaDeAlunosPaginados, setListaDeAlunosPaginados] = useState([]);
+    const [dadosPagina, setDadosPagina] = useState({});
+    const [paginaAtual, setPaginaAtual] = useState(0);
     const [nomeAluno, setNomeAluno] = useState("");
     const alunoService = new AlunoService;
+    let index = 0;
     //console.log("renderizou");
 
-    // Buscar todos os alunos
-    useEffect(() => {
-        alunoService.buscarAlunos().then((response) => {
-            setListaDeAlunos(response.data);
-        }).catch((error) => {
-            console.log("Erro ao buscar os registros dos alunos. " + error);
-        });
-    }, []);
+    // if(sessionStorage.getItem("InformacoesPagina") == null) {
+    //     sessionStorage.setItem("InformacoesPagina", JSON.stringify({
+    //         "page": 0,
+    //         "size": 2,
+    //         "sort": "id"
+    //     }))
+    // }
 
-    // Buscar aluno por ID
+    // function irParaPaginaSelecionada(informacoesPagina) {
+    //     useEffect(() => {
+    //         alunoService.buscarAlunosPorPagina(informacoesPagina).then((response) => {
+    //             setPaginaAtual(response.data);
+    //             setListaDeAlunosPaginados(response.data.content);
+    //             console.log(response.data);
+    //         }).catch((error) => {
+    //             console.log(error);
+    //         })
+    //     }, []);
+    // }
+
+    // irParaPaginaSelecionada(informacoesPagina);
+
     useEffect(() => {
-        alunoService.buscarAlunoPorId(1).then((response) => {
-            setNomeAluno(response.data);
+        alunoService.buscarAlunosPorPagina({"page": 0, "size": 2, "sort": "id"}).then((response) => {
+            setDadosPagina(response.data);
+            setListaDeAlunosPaginados(response.data.content);
+            console.log(response.data);
         }).catch((error) => {
-            console.log("Erro ao buscar o aluno com o ID fornecido. " + error);
+            console.log(error);
         })
     }, []);
+
+    // console.log(listaDeAlunosPaginados.content);
+    // setPaginaAtual(listaDeAlunosPaginados.content);
+    // setPaginaAtual([{
+    //     "nome": "José",
+    //     "cpf": "1234567890"
+    // }])
+
+    // Buscar aluno por ID
+    // useEffect(() => {
+    //     alunoService.buscarAlunoPorId(1).then((response) => {
+    //         setNomeAluno(response.data);
+    //     }).catch((error) => {
+    //         console.log("Erro ao buscar o aluno com o ID fornecido. " + error);
+    //     })
+    // }, []);
 
     return (
         <div>
             <h1>Alunos cadastrados</h1><br />
             <ol>
-                {listaDeAlunos.map((aluno) => {
-                    return(
-                        <li key={aluno.id}>
-                            Nome: {aluno.nome} | CPF: {aluno.cpf} | 
-                            <button type="submit" onClick={() => {
-                                const permissaoParaDeletar = confirm("Deseja realmente deletar esse aluno do sistema?");
+                {
+                    dadosPagina?.content?.map((alunoPaginado) => {
+                        return(
+                            <li key={alunoPaginado.id}>
+                                Nome: {alunoPaginado.nome} | CPF: {alunoPaginado.cpf} | 
+                                <button type="submit" onClick={() => {
+                                    const permissaoParaDeletar = confirm("Deseja realmente deletar esse aluno do sistema?");
 
-                                if(permissaoParaDeletar) {
-                                    alunoService.deletarAluno(aluno.id).then((response) => {
-                                        alert("Aluno deletado do sistema com sucesso.");
-                                        console.log(response.data);
-                                        location.reload();
-                                    }).catch((error) => {
-                                        alert("Erro ao deletar o aluno do sistema.");
-                                        console.log(error);
-                                    })
-                                }
-                            }}>Deletar aluno do sistema</button>
+                                    if(permissaoParaDeletar) {
+                                        alunoService.deletarAluno(alunoPaginado.id).then((response) => {
+                                            alert("Aluno deletado do sistema com sucesso.");
+                                            console.log(response.data);
+                                            location.reload();
+                                        }).catch((error) => {
+                                            alert("Erro ao deletar o aluno do sistema.");
+                                            console.log(error);
+                                        })
+                                    }
+                                }}>Deletar aluno do sistema</button>
 
-                            <Link href={'/alunos/atualizarAluno'}>
-                                <button onClick={() => {
-                                    sessionStorage.setItem("IdAluno", aluno.id)
-                                }}>Atualizar informações do aluno</button>
-                            </Link>
-                        </li>
-                    )
-                })}
+                                <Link href={'/alunos/atualizarAluno'}>
+                                    <button onClick={() => {
+                                        sessionStorage.setItem("IdAluno", aluno.id)
+                                    }}>Atualizar informações do aluno</button>
+                                </Link>
+                            </li>
+                        )
+                    })
+                }
             </ol>
+
+            <button onClick={() => {
+                setPaginaAtual((prev) => Math.max(prev - 1, 0))
+            }}
+            disabled={paginaAtual == 0}
+            >Página anterior</button>
+
+            <button onClick={() => [
+                setPaginaAtual((prev) => Math.max(prev + 1, 0))
+            ]}
+            >Próxima página</button>
 
             <Link href={'/alunos/cadastroAluno'}><button>Cadastrar novo aluno</button></Link>
             <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
