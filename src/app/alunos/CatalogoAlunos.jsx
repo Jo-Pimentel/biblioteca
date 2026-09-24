@@ -36,14 +36,14 @@ export default function CatalogoAlunos() {
     // irParaPaginaSelecionada(informacoesPagina);
 
     useEffect(() => {
-        alunoService.buscarAlunosPorPagina({"page": 0, "size": 2, "sort": "id"}).then((response) => {
+        alunoService.buscarAlunosPorPagina({"page": paginaAtual, "size": 3, "sort": "id"}).then((response) => {
             setDadosPagina(response.data);
             setListaDeAlunosPaginados(response.data.content);
             console.log(response.data);
         }).catch((error) => {
             console.log(error);
         })
-    }, []);
+    }, [paginaAtual]);
 
     // console.log(listaDeAlunosPaginados.content);
     // setPaginaAtual(listaDeAlunosPaginados.content);
@@ -97,15 +97,22 @@ export default function CatalogoAlunos() {
             </ol>
 
             <button onClick={() => {
-                setPaginaAtual((prev) => Math.max(prev - 1, 0))
+                setPaginaAtual((prev) => prev - 1)
+                console.log(paginaAtual);
+                // irParaPaginaSelecionada({"page": paginaAtual, "size": 2, "sort": "id"})
             }}
             disabled={paginaAtual == 0}
             >Página anterior</button>
 
-            <button onClick={() => [
-                setPaginaAtual((prev) => Math.max(prev + 1, 0))
-            ]}
-            >Próxima página</button>
+            <span>Página {paginaAtual + 1} de {dadosPagina.totalPages}</span>
+
+            <button onClick={() => {
+                setPaginaAtual(paginaAtual + 1)
+                console.log(paginaAtual)
+                // irParaPaginaSelecionada({"page": paginaAtual, "size": 2, "sort": "id"})
+            }}
+            disabled={paginaAtual + 1 >= dadosPagina.totalPages}
+            >Próxima página</button> <br />
 
             <Link href={'/alunos/cadastroAluno'}><button>Cadastrar novo aluno</button></Link>
             <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
