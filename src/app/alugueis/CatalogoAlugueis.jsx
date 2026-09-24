@@ -6,31 +6,42 @@ import AluguelService from "../service/AluguelService";
 export default function CatalogoAlugueis() {
     const alunoService = new AlunoService;
     const aluguelService = new AluguelService;
+    const [dadosPagina, setDadosPagina] = useState({});
+    const [paginaAtual, setPaginaAtual] = useState(0);
     const [listaDeAlunos, setListaDeAlunos] = useState([]);
     const [listaDeAlugueis, setListaDeAlugueis] = useState([]);
 
-    useEffect(() => {
-        alunoService.buscarAlunos().then((response) => {
-            setListaDeAlunos(response.data);
-        }).catch((error) => {
-            alert("Erro ao buscar os alunos " + error);
-        })
-    }, []);
+    // useEffect(() => {
+    //     alunoService.buscarAlunos().then((response) => {
+    //         setListaDeAlunos(response.data);
+    //     }).catch((error) => {
+    //         alert("Erro ao buscar os alunos " + error);
+    //     })
+    // }, []);
+
+    // useEffect(() => {
+    //     aluguelService.buscarAlugueis().then((response) => {
+    //         setListaDeAlugueis(response.data);
+    //     }).catch((error) => {
+    //         alert("Erro ao buscar os aluguéis " + error);
+    //     })
+    // }, []);
 
     useEffect(() => {
-        aluguelService.buscarAlugueis().then((response) => {
-            setListaDeAlugueis(response.data);
+        aluguelService.listarAlugueisPorPagina({"page": paginaAtual, "size": 3, "sort": "dataAluguel"}).then((response) => {
+            setDadosPagina(response.data);
+            console.log(response.data);
         }).catch((error) => {
-            alert("Erro ao buscar os aluguéis " + error);
+            alert("Erro ao buscar os aluguéis. " + error);
         })
-    }, []);
+    }, [paginaAtual])
 
     return (
         <>
             <h1>Aluguéis</h1> <br />
             <div>
                 <ol>
-                    {listaDeAlugueis.map((aluguel) => {
+                    {dadosPagina?.content?.map((aluguel) => {
                         return (
                             <li key={aluguel.id}>Aluno: {aluguel.aluno.nome} <br />Itens: {aluguel.itens.map((item) => {
                                 return (
@@ -65,6 +76,18 @@ export default function CatalogoAlugueis() {
                         )
                     })}
                 </ol>
+
+                <button onClick={() => {
+                    setPaginaAtual((prev) => prev - 1)
+                }}
+                disabled={paginaAtual == 0}
+                >Página anterior</button>
+
+                <button onClick={() => {
+                    setPaginaAtual((prev) => prev + 1)
+                }}
+                disabled={paginaAtual >= dadosPagina.totalPages - 1}
+                >Próxima página</button>
             </div>
             
             <Link href={'/'}><button>Voltar para a tela inicial</button></Link>

@@ -9,6 +9,10 @@ export default class AluguelService {
         return axiosInstance.get("/buscarAlugueis");
     }
 
+    listarAlugueisPorPagina(pagina) {
+        return axiosInstance.get(`/listarAlugueisPorPagina?page=${pagina.page}&size=${pagina.size}&sort=${pagina.sort},asc`)
+    }
+
     realizarAluguel(aluguelDto) {
         return axiosInstance.post("/realizarAluguel", aluguelDto)
         .catch((error) => {

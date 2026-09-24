@@ -11,30 +11,7 @@ export default function CatalogoAlunos() {
     const [nomeAluno, setNomeAluno] = useState("");
     const alunoService = new AlunoService;
     let index = 0;
-    //console.log("renderizou");
-
-    // if(sessionStorage.getItem("InformacoesPagina") == null) {
-    //     sessionStorage.setItem("InformacoesPagina", JSON.stringify({
-    //         "page": 0,
-    //         "size": 2,
-    //         "sort": "id"
-    //     }))
-    // }
-
-    // function irParaPaginaSelecionada(informacoesPagina) {
-    //     useEffect(() => {
-    //         alunoService.buscarAlunosPorPagina(informacoesPagina).then((response) => {
-    //             setPaginaAtual(response.data);
-    //             setListaDeAlunosPaginados(response.data.content);
-    //             console.log(response.data);
-    //         }).catch((error) => {
-    //             console.log(error);
-    //         })
-    //     }, []);
-    // }
-
-    // irParaPaginaSelecionada(informacoesPagina);
-
+    
     useEffect(() => {
         alunoService.buscarAlunosPorPagina({"page": paginaAtual, "size": 3, "sort": "id"}).then((response) => {
             setDadosPagina(response.data);
@@ -44,22 +21,6 @@ export default function CatalogoAlunos() {
             console.log(error);
         })
     }, [paginaAtual]);
-
-    // console.log(listaDeAlunosPaginados.content);
-    // setPaginaAtual(listaDeAlunosPaginados.content);
-    // setPaginaAtual([{
-    //     "nome": "José",
-    //     "cpf": "1234567890"
-    // }])
-
-    // Buscar aluno por ID
-    // useEffect(() => {
-    //     alunoService.buscarAlunoPorId(1).then((response) => {
-    //         setNomeAluno(response.data);
-    //     }).catch((error) => {
-    //         console.log("Erro ao buscar o aluno com o ID fornecido. " + error);
-    //     })
-    // }, []);
 
     return (
         <div>
@@ -97,6 +58,10 @@ export default function CatalogoAlunos() {
             </ol>
 
             <button onClick={() => {
+                setPaginaAtual(0)
+            }}>Primeira página</button>
+
+            <button onClick={() => {
                 setPaginaAtual((prev) => prev - 1)
                 console.log(paginaAtual);
                 // irParaPaginaSelecionada({"page": paginaAtual, "size": 2, "sort": "id"})
@@ -109,10 +74,15 @@ export default function CatalogoAlunos() {
             <button onClick={() => {
                 setPaginaAtual(paginaAtual + 1)
                 console.log(paginaAtual)
-                // irParaPaginaSelecionada({"page": paginaAtual, "size": 2, "sort": "id"})
             }}
             disabled={paginaAtual + 1 >= dadosPagina.totalPages}
-            >Próxima página</button> <br />
+            >Próxima página</button>
+            
+            <button onClick={() => {
+                setPaginaAtual(dadosPagina.totalPages - 1)
+            }}>Última página</button>
+            
+            <br/>
 
             <Link href={'/alunos/cadastroAluno'}><button>Cadastrar novo aluno</button></Link>
             <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
