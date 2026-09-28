@@ -11,22 +11,6 @@ export default function CatalogoAlugueis() {
     const [listaDeAlunos, setListaDeAlunos] = useState([]);
     const [listaDeAlugueis, setListaDeAlugueis] = useState([]);
 
-    // useEffect(() => {
-    //     alunoService.buscarAlunos().then((response) => {
-    //         setListaDeAlunos(response.data);
-    //     }).catch((error) => {
-    //         alert("Erro ao buscar os alunos " + error);
-    //     })
-    // }, []);
-
-    // useEffect(() => {
-    //     aluguelService.buscarAlugueis().then((response) => {
-    //         setListaDeAlugueis(response.data);
-    //     }).catch((error) => {
-    //         alert("Erro ao buscar os aluguéis " + error);
-    //     })
-    // }, []);
-
     useEffect(() => {
         aluguelService.listarAlugueisPorPagina({"page": paginaAtual, "size": 3, "sort": "dataAluguel"}).then((response) => {
             setDadosPagina(response.data);

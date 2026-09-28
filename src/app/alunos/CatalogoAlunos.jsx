@@ -17,10 +17,23 @@ export default function CatalogoAlunos() {
             setDadosPagina(response.data);
             setListaDeAlunosPaginados(response.data.content);
             console.log(response.data);
+            console.log(botoesPaginas);
         }).catch((error) => {
             console.log(error);
         })
     }, [paginaAtual]);
+
+    // while(botoesPaginas.length < dadosPagina?.totalPages) {
+    //     setBotoesPaginas(botoesPaginas.push(botoesPaginas.length + 1));
+    //     console.log(botoesPaginas);
+    // }
+
+    // for(let i = 0; i < dadosPagina.totalPages; i++) {
+    //     botoesPaginas.push(i);
+    //     console.log(botoesPaginas);
+    // }
+
+    const arrayPaginas = Array.from({length: dadosPagina?.totalPages}, (_, index) => index)
 
     return (
         <div>
@@ -61,25 +74,18 @@ export default function CatalogoAlunos() {
                 setPaginaAtual(0)
             }}>Primeira página</button>
 
-            <button onClick={() => {
-                setPaginaAtual((prev) => prev - 1)
-                console.log(paginaAtual);
-                // irParaPaginaSelecionada({"page": paginaAtual, "size": 2, "sort": "id"})
-            }}
-            disabled={paginaAtual == 0}
-            >Página anterior</button>
+            {arrayPaginas.map((pagina) => {
+                return (
+                    <button onClick={() => {
+                        setPaginaAtual(pagina)
+                    }}
+                    disabled={paginaAtual == pagina}
+                    >{pagina + 1}</button>
+                )
+            })}
 
-            <span>Página {paginaAtual + 1} de {dadosPagina.totalPages}</span>
-
             <button onClick={() => {
-                setPaginaAtual(paginaAtual + 1)
-                console.log(paginaAtual)
-            }}
-            disabled={paginaAtual + 1 >= dadosPagina.totalPages}
-            >Próxima página</button>
-            
-            <button onClick={() => {
-                setPaginaAtual(dadosPagina.totalPages - 1)
+                setPaginaAtual(arrayPaginas.length - 1)
             }}>Última página</button>
             
             <br/>
