@@ -20,6 +20,8 @@ export default function CatalogoAlugueis() {
         })
     }, [paginaAtual])
 
+    const arrayPaginas = Array.from({length: dadosPagina?.totalPages}, (_, index) => index);
+
     return (
         <>
             <h1>Aluguéis</h1> <br />
@@ -61,17 +63,31 @@ export default function CatalogoAlugueis() {
                     })}
                 </ol>
 
-                <button onClick={() => {
-                    setPaginaAtual((prev) => prev - 1)
-                }}
-                disabled={paginaAtual == 0}
-                >Página anterior</button>
+                {/* {arrayPaginas.map((pagina) => {
+                    return (
+                        <button onClick={() => {
+                            setPaginaAtual(pagina)
+                        }}>{pagina + 1}</button>
+                    )
+                })} */}
 
                 <button onClick={() => {
-                    setPaginaAtual((prev) => prev + 1)
-                }}
-                disabled={paginaAtual >= dadosPagina.totalPages - 1}
-                >Próxima página</button>
+                    setPaginaAtual(0)
+                }}>Primeira página</button>
+
+                {arrayPaginas.map((pagina) => {
+                    return (
+                        <button onClick={() => {
+                            setPaginaAtual(pagina)
+                        }}
+                        disabled={paginaAtual == pagina}
+                        >{pagina + 1}</button>
+                    )
+                })}
+
+                <button onClick={() => {
+                    setPaginaAtual(arrayPaginas.length - 1)
+                }}>Última página</button>
             </div>
             
             <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
