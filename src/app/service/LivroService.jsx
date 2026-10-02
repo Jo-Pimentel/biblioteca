@@ -13,6 +13,10 @@ export default class LivroService {
         return axiosInstance.get(`/buscarLivroPorId/${id}`)
     }
 
+    buscarLivrosPorPagina(page) {
+        return axiosInstance.get(`/buscarLivrosPorPagina?${page.page}=0&${page.size}=3&${page.sort}=id,asc`)
+    }
+
     salvarLivro(livro) {
         return axiosInstance.post("/salvarLivro", livro)
     }

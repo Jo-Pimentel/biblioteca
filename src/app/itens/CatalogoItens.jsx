@@ -7,46 +7,58 @@ import "../css/telaCadastro.css";
 export default function CatalogoItens() {
     const livroService = new LivroService;
     const filmeService = new FilmeService;
-    const [listaLivros, setListaLivros] = useState([]);
-    const [listaFilmes, setListaFilmes] = useState([]);
+    const [paginaAtualLivros, setPaginaAtualLivros] = useState(0);
+    const [paginaAtualFilmes, setPaginaAtualFilmes] = useState(0);
+    const [dadosPaginaLivros, setDadosPaginaLivros] = useState({});
+    const [dadosPaginaFilmes, setDadosPaginaFilmes] = useState({});
+    const [dadosPaginaExibida, setDadosPaginaExibida] = useState({});
+    const [tipoItensVistos, setTipoItensVistos] = useState("livros")
     let idsItensEscolhidos = [];
     let tiposItensEscolhidos = [];
     let index = 0;
 
     useEffect(() => {
-        livroService.buscarLivros().then((response) => {
-            setListaLivros(response.data);
+        livroService.buscarLivrosPorPagina({"page": paginaAtualLivros, "size": 3, "sort": "id"}).then((response) => {
+            setDadosPaginaLivros(response.data);
         }).catch((error) => {
             console.log("Erro ao buscar os registros dos livros. " + error);
         });
-    }, []);
+    }, [paginaAtualLivros]);
 
     useEffect(() => {
-        filmeService.buscarFilmes().then((response) => {
-            setListaFilmes(response.data);
+        filmeService.buscarFilmesPorPagina({"page": paginaAtualFilmes, "size": 3, "sort": "id"}).then((response) => {
+            setDadosPaginaFilmes(response.data);
         }).catch((error) => {
             console.log("Erro ao buscar os registros dos filmes. " + error);
         });
-    }, []);
+    }, [paginaAtualFilmes]);
 
     return (
         <>
             <h1>Catálogo de itens</h1>
 
             <label htmlFor="">Ver: </label>
-            <select onClick={(evt) => {
-                if(evt.target.value == "filmes") {
-                    return (
-                        <h1>Hello world!</h1>
-                    )
+            <select onChange={(evt) => {
+                if(evt.target.value == "livros") {
+                    setDadosPaginaExibida(dadosPaginaLivros);
+                } else {
+                    setDadosPaginaExibida(dadosPaginaFilmes);
                 }
             }}>
+                <option disabled></option>
                 <option value="livros">Livros</option>
                 <option value="filmes">Filmes</option>
-                <option value="ambos">Ambos</option>
             </select>
 
-            <p>Livros</p>
+            <ol>
+                {dadosPaginaExibida?.content?.map((item) => {
+                    return (
+                        <li key={item.id}>Título: {item.titulo} | Exemplares disponíveis: {item.qtdExemplaresDisponiveis}</li>
+                    )
+                })}
+            </ol>
+
+            {/* <p>Livros</p>
 
             <ol>
                 {
@@ -149,7 +161,7 @@ export default function CatalogoItens() {
                         )
                     })
                 }
-            </ol>
+            </ol> */}
 
             <Link href={'/itens/cadastroItem'}><button>Cadastrar novo item</button></Link>
             <Link href={'/'}><button>Voltar para a página inicial</button></Link>

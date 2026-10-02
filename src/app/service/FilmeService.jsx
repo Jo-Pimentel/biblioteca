@@ -13,6 +13,10 @@ export default class FilmeService {
         return axiosInstance.get(`/buscarFilmePorId/${id}`)
     }
 
+    buscarFilmesPorPagina(page) {
+        return axiosInstance.get(`/buscarFilmesPorPagina?${page.page}=0&${page.size}=3&${page.sort}=id,asc`)
+    }
+
     salvarFilme(filme) {
         return axiosInstance.post("/salvarFilme", filme)
     }

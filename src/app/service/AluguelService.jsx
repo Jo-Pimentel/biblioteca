@@ -28,6 +28,9 @@ export default class AluguelService {
     }
 
     devolucao(id) {
-        return axiosInstance.put(`/devolucao/${id}`);
+        return axiosInstance.put(`/devolucao/${id}`)
+        .catch((error) => {
+            alert(error.response.data.mensagem);
+        });
     }
 }
