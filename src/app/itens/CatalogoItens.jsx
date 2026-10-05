@@ -45,7 +45,7 @@ export default function CatalogoItens() {
                     setDadosPaginaExibida(dadosPaginaFilmes);
                 }
             }}>
-                <option disabled></option>
+                <option disabled>Escolha os itens exibidos</option>
                 <option value="livros">Livros</option>
                 <option value="filmes">Filmes</option>
             </select>
@@ -163,13 +163,15 @@ export default function CatalogoItens() {
                 }
             </ol> */}
 
-            <Link href={'/itens/cadastroItem'}><button>Cadastrar novo item</button></Link>
-            <Link href={'/'}><button>Voltar para a página inicial</button></Link>
-            <Link href={'/alugueis'}><button>Ir para aluguéis</button></Link>
-            <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
-                sessionStorage.setItem("IdsItensEscolhidos", JSON.stringify(idsItensEscolhidos));
-                sessionStorage.setItem("TiposItensEscolhidos", JSON.stringify(tiposItensEscolhidos));
-            }}>Alugar itens</button></Link>
+            <div className="container">
+                <Link href={'/itens/cadastroItem'}><button>Cadastrar novo item</button></Link>
+                <Link href={'/'}><button>Voltar para a página inicial</button></Link>
+                <Link href={'/alugueis'}><button>Ir para aluguéis</button></Link>
+                <Link href={'/alugueis/realizarAluguel'}><button onClick={() => {
+                    sessionStorage.setItem("IdsItensEscolhidos", JSON.stringify(idsItensEscolhidos));
+                    sessionStorage.setItem("TiposItensEscolhidos", JSON.stringify(tiposItensEscolhidos));
+                }}>Alugar itens</button></Link>
+            </div>
         </>
     )
 }

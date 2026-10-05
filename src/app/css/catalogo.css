@@ -3,3 +3,96 @@
     color: white;
     transition: 0.5s;
 }
+
+.tituloCatalogo {
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 10px 10px 10px 15px;
+    background-color: #3cb371;
+    width: 340px;
+    color: #fff;
+    border: 3px solid #000;
+    border-radius: 5px;
+}
+
+.botoesAcoesEntidade {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.botaoAcaoEntidade {
+    background-color: #3cb371;
+    color: #fff;
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.entidadesRetornadas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.entidadeRetornada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background-color: #ffa500;
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    border: 3px solid #000;
+    border-radius: 5px;
+}
+
+.botoesPaginacao {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}
+
+.botaoPaginado {
+    background-color: #3cb371;
+    height: 30px;
+    width: 30px;
+    color: #fff;
+    font-size: 15;
+    border-radius: 5px;
+
+    &:disabled {
+        background-color: #3cb37180;
+    }
+}
+
+.botaoPaginadoPrimeiraEUltimaPagina {
+    background-color: #3CB371;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+    color: #fff;
+}
+
+.botoesRotas {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.botaoRota {
+    background-color: #3cb371;
+    color: #fff;
+}
