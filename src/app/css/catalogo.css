@@ -5,14 +5,16 @@
 }
 
 .tituloCatalogo {
-    margin-left: 10px;
-    margin-top: 5px;
-    padding: 10px 10px 10px 15px;
-    background-color: #3cb371;
+    /* margin-left: 1px;
+    margin-top: 5px; */
+    margin: 0 auto;
+    padding: 10px 10px 0 15px;
+    font-weight: bold;
+    color: #3cb37180;
+    -webkit-text-stroke: 1px #000;
     width: 340px;
-    color: #fff;
-    border: 3px solid #000;
     border-radius: 5px;
+    /* animation: mostrarTituloCatalogo linear 2s infinite; */
 }
 
 .botoesAcoesEntidade {
@@ -95,4 +97,15 @@ button {
 .botaoRota {
     background-color: #3cb371;
     color: #fff;
+}
+
+
+/* Área destinada às animações de alguns componentes */
+
+@keyframes mostrarTituloCatalogo {
+    from {
+        margin-top: -10px;
+    } to {
+        margin-top: 5px;
+    }
 }
