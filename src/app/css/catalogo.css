@@ -5,14 +5,10 @@
 }
 
 .tituloCatalogo {
-    /* margin-left: 1px;
-    margin-top: 5px; */
-    margin: 0 auto;
     padding: 10px 10px 0 15px;
     font-weight: bold;
     color: #3cb37180;
     -webkit-text-stroke: 1px #000;
-    width: 340px;
     border-radius: 5px;
     /* animation: mostrarTituloCatalogo linear 2s infinite; */
 }
@@ -33,9 +29,15 @@ button {
     font-weight: bold;
 }
 
+hr {
+    /* Para o catálogo de aluguéis, que possui <hr/> */
+    width: 340px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 

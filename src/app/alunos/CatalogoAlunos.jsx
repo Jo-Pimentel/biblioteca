@@ -36,67 +36,69 @@ export default function CatalogoAlunos() {
     const arrayPaginas = Array.from({length: dadosPagina?.totalPages}, (_, index) => index)
 
     return (
-        <div className="container">
-            <h1 className="tituloCatalogo">Alunos cadastrados</h1><br />
-            <div className="entidadesRetornadas">
-                {
-                    dadosPagina?.content?.map((alunoPaginado) => {
-                        return(
-                            <span className="entidadeRetornada" key={alunoPaginado.id}>
-                                Nome: {alunoPaginado.nome} | CPF: {alunoPaginado.cpf}
-                                <span className="botoesAcoesEntidade"> 
-                                    <button className="botaoAcaoEntidade" type="submit" onClick={() => {
-                                        const permissaoParaDeletar = confirm("Deseja realmente deletar esse aluno do sistema?");
+        <>
+            <div className="container">
+                <h1 className="tituloCatalogo">Alunos cadastrados</h1><br />
+                <div className="entidadesRetornadas">
+                    {
+                        dadosPagina?.content?.map((alunoPaginado) => {
+                            return(
+                                <span className="entidadeRetornada" key={alunoPaginado.id}>
+                                    Nome: {alunoPaginado.nome} | CPF: {alunoPaginado.cpf}
+                                    <span className="botoesAcoesEntidade"> 
+                                        <button className="botaoAcaoEntidade" type="submit" onClick={() => {
+                                            const permissaoParaDeletar = confirm("Deseja realmente deletar esse aluno do sistema?");
 
-                                        if(permissaoParaDeletar) {
-                                            alunoService.deletarAluno(alunoPaginado.id).then((response) => {
-                                                alert("Aluno deletado do sistema com sucesso.");
-                                                console.log(response.data);
-                                                location.reload();
-                                            }).catch((error) => {
-                                                alert("Erro ao deletar o aluno do sistema.");
-                                                console.log(error);
-                                            })
-                                        }
-                                    }}>Deletar aluno do sistema</button>
+                                            if(permissaoParaDeletar) {
+                                                alunoService.deletarAluno(alunoPaginado.id).then((response) => {
+                                                    alert("Aluno deletado do sistema com sucesso.");
+                                                    console.log(response.data);
+                                                    location.reload();
+                                                }).catch((error) => {
+                                                    alert("Erro ao deletar o aluno do sistema.");
+                                                    console.log(error);
+                                                })
+                                            }
+                                        }}>Deletar aluno do sistema</button>
 
-                                    <Link href={'/alunos/atualizarAluno'}>
-                                        <button className="botaoAcaoEntidade" onClick={() => {
-                                            sessionStorage.setItem("IdAluno", aluno.id)
-                                        }}>Atualizar informações do aluno</button>
-                                    </Link>
+                                        <Link href={'/alunos/atualizarAluno'}>
+                                            <button className="botaoAcaoEntidade" onClick={() => {
+                                                sessionStorage.setItem("IdAluno", aluno.id)
+                                            }}>Atualizar informações do aluno</button>
+                                        </Link>
+                                    </span>
                                 </span>
-                            </span>
+                            )
+                        })
+                    }
+                </div>
+
+                <div className="botoesPaginacao">
+                    <button className="botaoPaginadoPrimeiraEUltimaPagina" onClick={() => {
+                        setPaginaAtual(0)
+                    }}>Primeira página</button>
+
+                    {arrayPaginas.map((pagina) => {
+                        return (
+                            <button className="botaoPaginado" onClick={() => {
+                                setPaginaAtual(pagina)
+                            }}
+                            disabled={paginaAtual == pagina}
+                            >{pagina + 1}</button>
                         )
-                    })
-                }
-            </div>
+                    })}
 
-            <div className="botoesPaginacao">
-                <button className="botaoPaginadoPrimeiraEUltimaPagina" onClick={() => {
-                    setPaginaAtual(0)
-                }}>Primeira página</button>
-
-                {arrayPaginas.map((pagina) => {
-                    return (
-                        <button className="botaoPaginado" onClick={() => {
-                            setPaginaAtual(pagina)
-                        }}
-                        disabled={paginaAtual == pagina}
-                        >{pagina + 1}</button>
-                    )
-                })}
-
-                <button className="botaoPaginadoPrimeiraEUltimaPagina" onClick={() => {
-                    setPaginaAtual(arrayPaginas.length - 1)
-                }}>Última página</button>
-            </div>
+                    <button className="botaoPaginadoPrimeiraEUltimaPagina" onClick={() => {
+                        setPaginaAtual(arrayPaginas.length - 1)
+                    }}>Última página</button>
+                </div>
+            </div> 
 
             <div className="botoesRotas">
                 <Link href={'/alunos/cadastroAluno'}><button className="botaoRota">Cadastrar novo aluno</button></Link>
                 <Link href={'/'}><button className="botaoRota">Voltar para a tela inicial</button></Link>
                 <Link href={'/alugueis'}><button className="botaoRota">Ir para os aluguéis</button></Link>
             </div>
-        </div> 
+        </>
     )
 }

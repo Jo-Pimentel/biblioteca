@@ -41,8 +41,10 @@ export default function CadastroAluno() {
 
                 <h1>{mensagem}</h1>
 
-                <Link href={'/alunos'}><button>Voltar para o catálogo</button></Link>
-                <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
+                <div className="botoesRotas">
+                    <Link href={'/alunos'}><button>Voltar para o catálogo</button></Link>
+                    <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
+                </div>
             </div>
         </div>
     )
