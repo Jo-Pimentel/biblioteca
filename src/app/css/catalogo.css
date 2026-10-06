@@ -101,6 +101,12 @@ hr {
     color: #fff;
 }
 
+.botaoRota, .botaoAcaoEntidade {
+    border-radius: 5px;
+    font-size: 14;
+    padding: 3px;
+}
+
 
 /* Área destinada às animações de alguns componentes */
 
