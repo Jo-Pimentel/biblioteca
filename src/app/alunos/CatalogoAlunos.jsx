@@ -13,7 +13,7 @@ export default function CatalogoAlunos() {
     let index = 0;
     
     useEffect(() => {
-        alunoService.buscarAlunosPorPagina({"page": paginaAtual, "size": 3, "sort": "id"}).then((response) => {
+        alunoService.buscarAlunosPorPagina({"page": paginaAtual, "size": 4, "sort": "id"}).then((response) => {
             setDadosPagina(response.data);
             setListaDeAlunosPaginados(response.data.content);
             console.log(response.data);
@@ -23,22 +23,12 @@ export default function CatalogoAlunos() {
         })
     }, [paginaAtual]);
 
-    // while(botoesPaginas.length < dadosPagina?.totalPages) {
-    //     setBotoesPaginas(botoesPaginas.push(botoesPaginas.length + 1));
-    //     console.log(botoesPaginas);
-    // }
-
-    // for(let i = 0; i < dadosPagina.totalPages; i++) {
-    //     botoesPaginas.push(i);
-    //     console.log(botoesPaginas);
-    // }
-
     const arrayPaginas = Array.from({length: dadosPagina?.totalPages}, (_, index) => index)
 
     return (
         <>
             <div className="container">
-                <h1 className="tituloCatalogo">Alunos cadastrados</h1><br />
+                <h1 className="tituloCatalogo">Alunos cadastrados</h1>
                 <div className="entidadesRetornadas">
                     {
                         dadosPagina?.content?.map((alunoPaginado) => {
