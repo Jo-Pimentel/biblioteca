@@ -4,11 +4,41 @@
     transition: 0.5s;
 }
 
-.tituloCatalogo {
-    padding: 10px 10px 0 15px;
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* gap: 40px; */
+    width: 100%;
+    height: 50px;
+    background-color: #3cb371;
+}
+
+.botoesRotas {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 16px;
+    margin-right: 10px;
+    /* margin-left: 10px;
+    margin-bottom: 5px; */
+}
+
+.linkRota {
+    text-decoration: none;
+    color: #fff;
     font-weight: bold;
-    color: #3cb37180;
-    -webkit-text-stroke: 1px #000;
+    font-size: 16;
+    /* -webkit-text-stroke: 0.7px #000; */
+}
+
+.tituloCatalogo {
+    /* padding: 10px 10px 0 15px; */
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #fff;
+    /* -webkit-text-stroke: 1px #000; */
     border-radius: 5px;
     /* animation: mostrarTituloCatalogo linear 2s infinite; */
 }
@@ -66,6 +96,7 @@ hr {
     flex-direction: row;
     justify-content: center;
     gap: 5px;
+    margin-bottom: 15px;
 }
 
 .botaoPaginado {
@@ -88,24 +119,15 @@ hr {
     color: #fff;
 }
 
-.botoesRotas {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-left: 10px;
-    margin-bottom: 5px;
-}
-
-.botaoRota {
-    background-color: #3cb371;
-    color: #fff;
-}
-
 .botaoRota, .botaoAcaoEntidade {
     border-radius: 5px;
     font-size: 14;
     padding: 3px;
 }
+
+/* span {
+    -webkit-text-stroke: 0.5px #000;
+} */
 
 
 /* Área destinada às animações de alguns componentes */

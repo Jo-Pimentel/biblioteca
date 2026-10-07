@@ -28,13 +28,21 @@ export default function CatalogoAlunos() {
     return (
         <>
             <div className="container">
-                <h1 className="tituloCatalogo">Alunos cadastrados</h1>
+                <header>
+                    <h1 className="tituloCatalogo">Alunos cadastrados</h1>
+                    <div className="botoesRotas">
+                        <Link href={'/alunos/cadastroAluno'} className="linkRota">Cadastrar novo aluno</Link>
+                        <Link href={'/'} className="linkRota">Voltar para a tela inicial</Link>
+                        <Link href={'/alugueis'} className="linkRota">Ir para os aluguéis</Link>
+                    </div>
+                </header>
+
                 <div className="entidadesRetornadas">
                     {
                         dadosPagina?.content?.map((alunoPaginado) => {
                             return(
                                 <span className="entidadeRetornada" key={alunoPaginado.id}>
-                                    Nome: {alunoPaginado.nome} | CPF: {alunoPaginado.cpf}
+                                    Nome: {alunoPaginado.nome} <hr /> CPF: {alunoPaginado.cpf}
                                     <span className="botoesAcoesEntidade"> 
                                         <button className="botaoAcaoEntidade" type="submit" onClick={() => {
                                             const permissaoParaDeletar = confirm("Deseja realmente deletar esse aluno do sistema?");
@@ -82,12 +90,6 @@ export default function CatalogoAlunos() {
                         setPaginaAtual(arrayPaginas.length - 1)
                     }}>Última página</button>
                 </div>
-            </div> 
-
-            <div className="botoesRotas">
-                <Link href={'/alunos/cadastroAluno'}><button className="botaoRota">Cadastrar novo aluno</button></Link>
-                <Link href={'/'}><button className="botaoRota">Voltar para a tela inicial</button></Link>
-                <Link href={'/alugueis'}><button className="botaoRota">Ir para os aluguéis</button></Link>
             </div>
         </>
     )
