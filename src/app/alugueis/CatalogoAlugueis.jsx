@@ -20,12 +20,26 @@ export default function CatalogoAlugueis() {
         })
     }, [paginaAtual])
 
+    function formatarData(dataNaoFormatada) {
+        if(dataNaoFormatada == null) {
+            return "Ainda não devolvido";
+        }
+        const dataApenasComNumeros = dataNaoFormatada.split("-");
+        return `${dataApenasComNumeros[2]}/${dataApenasComNumeros[1]}/${dataApenasComNumeros[0]}`;
+    }
+
     const arrayPaginas = Array.from({length: dadosPagina?.totalPages}, (_, index) => index);
 
     return (
         <>
             <div className="container">
-                <h1 className="tituloCatalogo">Aluguéis</h1>
+                <header>
+                    <h1 className="tituloCatalogo">Aluguéis</h1>
+
+                    <div className="botoesRotas">
+                        <Link href={'/'} className="linkRota">Voltar para a tela inicial</Link>
+                    </div>
+                </header>
                 
                 <div className="entidadesRetornadas">
                     {dadosPagina?.content?.map((aluguel) => {
@@ -34,9 +48,9 @@ export default function CatalogoAlugueis() {
                                 return (
                                     <span key={item.id}>{item.titulo}</span>
                                 )
-                            })} <hr /> Data de devolução: {aluguel.dataDevolucao} <br />
-                            Aluguel realizado em: {aluguel.dataAluguel} <br />
-                            Devolvido em: {aluguel.devolvidoEm} <br />
+                            })} <hr /> Data de devolução: {formatarData(aluguel.dataDevolucao)} <br />
+                            Aluguel realizado em: {formatarData(aluguel.dataAluguel)} <br />
+                            Devolvido em: {formatarData(aluguel.devolvidoEm)} <br />
                                 <div className="botoesAcoesEntidade">
                                     <button className="botaoAcaoEntidade" onClick={() => {
                                         aluguelService.prorrogarDevolucao(aluguel.id).then((response) => {
@@ -85,10 +99,6 @@ export default function CatalogoAlugueis() {
                         setPaginaAtual(arrayPaginas.length - 1)
                     }}>Última página</button>
                 </div>
-            </div>
-            
-            <div className="botoesRotas">
-                <Link href={'/'}><button className="botaoRota">Voltar para a tela inicial</button></Link>
             </div>
         </>
     )
