@@ -14,36 +14,37 @@ export default function CadastroAluno() {
     return (
         <div className="screen">
             <div className="telaCadastro">
-                <label>Digite o nome do aluno abaixo</label>
-                <input type="text" id="nomeAluno" onInput={(evt) => {
-                    setNomeAluno(evt.target.value);
-                }}/>
+                <h1 className="tituloCadastro">Cadastro de alunos</h1>
+                <div className="informacoesCadastro">
+                    <label>Digite o nome do aluno abaixo</label>
+                    <input type="text" id="nomeAluno" onInput={(evt) => {
+                        setNomeAluno(evt.target.value);
+                    }}/>
 
-                <label>Digite o CPF do aluno abaixo</label>
-                <input type="text" id="cpfAluno" onInput={(evt) => {
-                    setCpfAluno(evt.target.value);
-                }}/>
+                    <label>Digite o CPF do aluno abaixo</label>
+                    <input type="text" id="cpfAluno" onInput={(evt) => {
+                        setCpfAluno(evt.target.value);
+                    }}/>
 
-                <button type="submit" onClick={() => {
-                    const novoAluno = {
-                        "nome": nomeAluno,
-                        "cpf": cpfAluno
-                    }
+                    <button type="submit" onClick={() => {
+                        const novoAluno = {
+                            "nome": nomeAluno,
+                            "cpf": cpfAluno
+                        }
 
-                    alunoService.salvarAluno(novoAluno).then((response) => {
-                        console.log(response.data);
-                        setMensagem("Aluno cadastrado com sucesso!");
-                    }).catch((error) => {
-                        console.log(error);
-                        setMensagem(error);
-                    }) 
-                }}>Cadastrar aluno</button>
+                        alunoService.salvarAluno(novoAluno).then((response) => {
+                            console.log(response.data);
+                            alert("Aluno cadastrado com sucesso!");
+                        }).catch((error) => {
+                            console.log(error);
+                            alert(`Erro ao cadastrar o aluno ${error}`);
+                        }) 
+                    }}>Cadastrar aluno</button>
 
-                <h1>{mensagem}</h1>
-
-                <div className="botoesRotas">
-                    <Link href={'/alunos'}><button>Voltar para o catálogo</button></Link>
-                    <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
+                    <div className="botoesRotas">
+                        <Link href={'/alunos'}><button>Voltar para o catálogo</button></Link>
+                        <Link href={'/'}><button>Voltar para a tela inicial</button></Link>
+                    </div>
                 </div>
             </div>
         </div>

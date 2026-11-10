@@ -11,7 +11,12 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    /* border: 3px solid #000; */
 }
+
+/* .tituloCadastro {
+    background: linear-gradient(#e66465, #9198e5);
+} */
 
 label {
     font-weight: bold;
@@ -24,6 +29,38 @@ label {
     justify-content: center;
     gap: 10px;
     height: 100vh;
+    /* border: 3px solid #000; */
+}
+
+.informacoesCadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #000;
+    background-color: #ffa500;
+    /* #ffa500 */
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.botoesRotas {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+label, button {
+    color: #fff;
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #3cb371;
+    /* #3cb371 */
+    border-radius: 5px;
+    padding: 3px;
 }
 
 p {

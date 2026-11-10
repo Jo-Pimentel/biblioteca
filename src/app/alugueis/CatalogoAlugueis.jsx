@@ -21,10 +21,10 @@ export default function CatalogoAlugueis() {
     }, [paginaAtual])
 
     function formatarData(dataNaoFormatada) {
-        if(dataNaoFormatada == null) {
+        if(dataNaoFormatada == null) { // Para aluguéis que ainda não foram devolvidos, o servidor retorna o atributo devolvidoEm, da entidade Aluguel, como null.
             return "Ainda não devolvido";
         }
-        const dataApenasComNumeros = dataNaoFormatada.split("-");
+        const dataApenasComNumeros = dataNaoFormatada.split("-"); // Deixa apenas os números das datas retornadas pelo servidor e os envia para um array. ex: "2026-02-1" vira ["2026", "02", "01"]
         return `${dataApenasComNumeros[2]}/${dataApenasComNumeros[1]}/${dataApenasComNumeros[0]}`;
     }
 
