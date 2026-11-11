@@ -92,6 +92,24 @@ hr {
     border-radius: 5px;
 }
 
+.entidadeRetornadaItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    /* background-color: #ffa500; */
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    border: 3px solid #000;
+    border-radius: 5px;
+}
+
+.imgItem {
+    height: 170px;
+    width: 118px;
+}
+
 .botoesPaginacao {
     display: flex;
     flex-direction: row;

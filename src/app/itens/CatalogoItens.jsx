@@ -3,16 +3,22 @@ import LivroService from "../service/LivroService";
 import FilmeService from "../service/FilmeService";
 import { useEffect, useState } from "react";
 import "../css/telaCadastro.css";
+import "../css/catalogo.css";
+import ItemService from "../service/ItemService";
 
 export default function CatalogoItens() {
     const livroService = new LivroService;
     const filmeService = new FilmeService;
+    const itemService = new ItemService;
     const [paginaAtualLivros, setPaginaAtualLivros] = useState(0);
     const [paginaAtualFilmes, setPaginaAtualFilmes] = useState(0);
+    const [paginaAtual, setPaginaAtual] = useState(0);
     const [dadosPaginaLivros, setDadosPaginaLivros] = useState({});
     const [dadosPaginaFilmes, setDadosPaginaFilmes] = useState({});
+    const [dadosPaginaAmbos, setDadosPaginaAmbos] = useState({});
+    const [dadosPagina, setDadosPagina] = useState({});
+    const [listaDeItens, setListaDeItens] = useState([]);
     const [dadosPaginaExibida, setDadosPaginaExibida] = useState({});
-    const [tipoItensVistos, setTipoItensVistos] = useState("livros")
     let idsItensEscolhidos = [];
     let tiposItensEscolhidos = [];
     let index = 0;
@@ -33,30 +39,61 @@ export default function CatalogoItens() {
         });
     }, [paginaAtualFilmes]);
 
+    useEffect(() => {
+        itemService.buscarItens({"page": paginaAtualFilmes, "size": 3, "sort": "id"}).then((response) => {
+            setDadosPagina(response.data);
+            setDadosPaginaAmbos(response.data);
+            setListaDeItens(response.data.content);
+        }).catch((error) => {
+            console.log("Erro ao buscar os registros dos filmes. " + error);
+        });
+    }, [paginaAtualFilmes]);
+
+    const arrayPaginas = Array.from({length: dadosPagina?.totalPages}, (_, index) => index)
+
     return (
         <>
-            <h1>Catálogo de itens</h1>
+            <header>
+                <h1 className="tituloCatalogo">Catálogo de itens</h1>
+            </header>
 
             <label htmlFor="">Ver: </label>
             <select onChange={(evt) => {
+                setPaginaAtual(0);
                 if(evt.target.value == "livros") {
-                    setDadosPaginaExibida(dadosPaginaLivros);
+                    setDadosPagina(dadosPaginaLivros);
+                } else if(evt.target.value == "filmes") {
+                    setDadosPagina(dadosPaginaFilmes);
                 } else {
-                    setDadosPaginaExibida(dadosPaginaFilmes);
+                    setDadosPagina(dadosPaginaAmbos);
                 }
             }}>
                 <option disabled>Escolha os itens exibidos</option>
-                <option value="livros">Livros</option>
-                <option value="filmes">Filmes</option>
+                <option value="livros">Apenas livros</option>
+                <option value="filmes">Apenas filmes</option>
+                <option value="ambos">Ambos</option>
             </select>
 
-            <ol>
-                {dadosPaginaExibida?.content?.map((item) => {
+            {/* <ol>
+                {dadosPagina?.content?.map((item) => {
                     return (
-                        <li key={item.id}>Título: {item.titulo} | Exemplares disponíveis: {item.qtdExemplaresDisponiveis}</li>
+                        <span className="entidadeRetornada">
+                            <li key={item.id}>Título: {item.titulo} <hr /> Exemplares disponíveis: {item.qtdExemplaresDisponiveis}</li>
+                        </span>
                     )
                 })}
-            </ol>
+            </ol> */}
+
+            <div className="entidadesRetornadas">
+                {dadosPagina?.content?.map((item) => {
+                    return (
+                        <span className="entidadeRetornadaItem" key={item.id}>
+                            <img className="imgItem" src={item.urlImgItem} alt="" />
+                            <span className="tituloItem">{item.titulo}</span>
+                        </span>
+                    ) // Na-na-não aguentam nada,
+                })}
+            </div>
 
             {/* <p>Livros</p>
 
@@ -163,7 +200,7 @@ export default function CatalogoItens() {
                 }
             </ol> */}
 
-            <div className="container">
+            {/* <div className="container">
                 <Link href={'/itens/cadastroItem'}><button>Cadastrar novo item</button></Link>
                 <Link href={'/'}><button>Voltar para a página inicial</button></Link>
                 <Link href={'/alugueis'}><button>Ir para aluguéis</button></Link>
@@ -171,7 +208,7 @@ export default function CatalogoItens() {
                     sessionStorage.setItem("IdsItensEscolhidos", JSON.stringify(idsItensEscolhidos));
                     sessionStorage.setItem("TiposItensEscolhidos", JSON.stringify(tiposItensEscolhidos));
                 }}>Alugar itens</button></Link>
-            </div>
+            </div> */}
         </>
     )
 }

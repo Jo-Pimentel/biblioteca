@@ -49,7 +49,7 @@ export default function CatalogoAlunos() {
 
                                             if(permissaoParaDeletar) {
                                                 alunoService.deletarAluno(alunoPaginado.id).then((response) => {
-                                                    alert("Aluno deletado do sistema com sucesso.");
+                                                    alert("Aluno deletado do sistema com sucesso!");
                                                     console.log(response.data);
                                                     location.reload();
                                                 }).catch((error) => {
@@ -61,7 +61,7 @@ export default function CatalogoAlunos() {
 
                                         <Link href={'/alunos/atualizarAluno'}>
                                             <button className="botaoAcaoEntidade" onClick={() => {
-                                                sessionStorage.setItem("IdAluno", aluno.id)
+                                                sessionStorage.setItem("IdAluno", alunoPaginado.id)
                                             }}>Atualizar informações do aluno</button>
                                         </Link>
                                     </span>
